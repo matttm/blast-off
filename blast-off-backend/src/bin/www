@@ -6,12 +6,12 @@
 const primaryHandler = require('../app');
 const debug = require('debug')('blast-off-backend:server');
 const http = require('http');
-const configureEnv = require('dotenv');
+const dotenv = require('dotenv');
 const path = require('path');
 
 if (process.env.NODE_ENV) {
   console.log(`Running in ${process.env.NODE_ENV} mode`);
-  const config = configureEnv({
+  const config = dotenv.config({
     path: path.resolve(
         process.cwd(),
         `./configurations/${process.env.NODE_ENV}.config`
