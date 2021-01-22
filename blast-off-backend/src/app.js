@@ -7,6 +7,7 @@ const logger = require('morgan');
 const indexRouter = require('./routes/index');
 const usersRouter = require('./routes/users');
 
+// TODO: should this actually be blastOffHandler?
 const primaryHandler = express();
 
 primaryHandler.use(logger('dev'));
