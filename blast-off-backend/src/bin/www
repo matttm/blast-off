@@ -9,6 +9,7 @@ const http = require('http');
 const dotenv = require('dotenv');
 const path = require('path');
 
+// Loading config based on environment type
 if (process.env.NODE_ENV) {
   console.log(`Running in ${process.env.NODE_ENV} mode`);
   const config = dotenv.config({
@@ -24,6 +25,13 @@ if (process.env.NODE_ENV) {
 } else {
   console.log('No node environment specified.');
   // immediateShutdown(-1);
+}
+// Loading secrets
+const secrets = dotenv.config();
+if (secrets.error) {
+  console.log('Secrets env not found, so some features will be disabled.');
+} else {
+  console.log('Secrets env found and loaded to the environment.');
 }
 
 /**
