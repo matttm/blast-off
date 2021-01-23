@@ -3,110 +3,64 @@
 /**
  * Module dependencies.
  */
-const primaryHandler = require('../app');
-const debug = require('debug')('blast-off-backend:server');
+const getConfiguredHandler = require('../app');
 const http = require('http');
-const dotenv = require('dotenv');
+const { config } = require('dotenv');
 const path = require('path');
+const {normalizePort} = require("../utilities");
+const {onListening} = require("../utilities");
+const {onError} = require("../utilities");
 
-// Loading config based on environment type
-if (process.env.NODE_ENV) {
-  console.log(`Running in ${process.env.NODE_ENV} mode`);
-  const config = dotenv.config({
-    path: path.resolve(
-        process.cwd(),
-        `./configurations/${process.env.NODE_ENV}.config`
-    )
-  });
-  if (config.error) {
-    console.log('Error loading configuration file.');
+const startServer = async () => {
+  console.log('Starting server');
+  // Loading config based on environment type
+  if (process.env.NODE_ENV) {
+    console.log(`Running in ${process.env.NODE_ENV} mode`);
+    const configObj = config({
+      path: path.resolve(
+          process.cwd(),
+          `./configurations/${process.env.NODE_ENV}.config`
+      )
+    });
+    if (configObj.error) {
+      console.log('Error loading configuration file.');
+      // immediateShutdown(-1);
+    }
+  } else {
+    console.log('No node environment specified.');
     // immediateShutdown(-1);
   }
-} else {
-  console.log('No node environment specified.');
-  // immediateShutdown(-1);
-}
-// Loading secrets
-const secrets = dotenv.config();
-if (secrets.error) {
-  console.log('Secrets env not found, so some features will be disabled.');
-} else {
-  console.log('Secrets env found and loaded to the environment.');
-}
-
-/**
- * Get port from environment and store in Express.
- */
-const port = normalizePort(process.env.PORT || '3000');
-primaryHandler.set('port', port);
-
-/**
- * Create HTTP server.
- */
-const server = http.createServer(primaryHandler);
-
-/**
- * Listen on provided port, on all network interfaces.
- */
-server.listen(port);
-server.on('error', onError);
-server.on('listening', onListening);
-
-/**
- * Normalize a port into a number, string, or false.
- */
-function normalizePort(val) {
-  const port = parseInt(val, 10);
-
-  if (isNaN(port)) {
-    // named pipe
-    return val;
+  // Loading secrets
+  const secrets = config();
+  if (secrets.error) {
+    console.log('Secrets env not found, so some features will be disabled.');
+  } else {
+    console.log('Secrets env found and loaded to the environment.');
   }
 
-  if (port >= 0) {
-    // port number
-    return port;
-  }
+  /**
+   * Get port from environment and store in Express.
+   */
+  const handler = await getConfiguredHandler();
+  const port = normalizePort(process.env.PORT || '3000');
+  handler.set('port', port);
 
-  return false;
-}
+  /**
+   * Create HTTP server.
+   */
+  const server = http.createServer(handler);
 
-/**
- * Event listener for HTTP server "error" event.
- */
+  /**
+   * Listen on provided port, on all network interfaces.
+   */
+  server.listen(port);
+  server.on('error', onError);
+  server.on('listening', onListening);
+};
 
-function onError(error) {
-  if (error.syscall !== 'listen') {
-    throw error;
-  }
-
-  const bind = typeof port === 'string'
-    ? 'Pipe ' + port
-    : 'Port ' + port;
-
-  // handle specific listen errors with friendly messages
-  switch (error.code) {
-    case 'EACCES':
-      console.error(bind + ' requires elevated privileges');
-      process.exit(1);
-      break;
-    case 'EADDRINUSE':
-      console.error(bind + ' is already in use');
-      process.exit(1);
-      break;
-    default:
-      throw error;
-  }
-}
-
-/**
- * Event listener for HTTP server "listening" event.
- */
-
-function onListening() {
-  const addr = server.address();
-  const bind = typeof addr === 'string'
-    ? 'pipe ' + addr
-    : 'port ' + addr.port;
-  console.log('Listening on ' + bind);
-}
+startServer()
+    .then(() => null)
+    .catch((err) => {
+      console.log(`Server could not be started`);
+      console.log(`${err}`);
+    });
