@@ -38,7 +38,7 @@ const getConfiguredHandler = async () => {
     res.render('error');
   });
 
-  await createConnection();
+  const connection = await createConnection();
   findAllControllers().map(applyController => applyController(primaryHandler));
   primaryHandler.use(entityNotFoundErrorHandler);
   primaryHandler.use(errorHandler);
