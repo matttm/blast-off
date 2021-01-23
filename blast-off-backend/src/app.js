@@ -1,8 +1,10 @@
 const createError = require('http-errors');
 const express = require('express');
-const path = require('path');
 const cookieParser = require('cookie-parser');
 const logger = require('morgan');
+const {entityNotFoundErrorHandler} = require("./utilities");
+const {errorHandler} = require("./utilities");
+const {findAllControllers} = require("./utilities");
 
 const indexRouter = require('./routes/index');
 const usersRouter = require('./routes/users');
@@ -33,5 +35,9 @@ primaryHandler.use(function(err, req, res, next) {
   res.status(err.status || 500);
   res.render('error');
 });
+
+findAllControllers().map(applyController => applyController(primaryHandler));
+primaryHandler.use(entityNotFoundErrorHandler);
+primaryHandler.use(errorHandler);
 
 module.exports = primaryHandler;
