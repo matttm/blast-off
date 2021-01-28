@@ -7,9 +7,7 @@ const getConfiguredHandler = require('../app');
 const http = require('http');
 const { config } = require('dotenv');
 const path = require('path');
-const {normalizePort} = require("../utilities");
-const {onListening} = require("../utilities");
-const {onError} = require("../utilities");
+const {onError, gracefulShutdown, onListening, normalizePort} = require("../utilities");
 
 const startServer = async () => {
   console.log('Starting server');
@@ -24,11 +22,11 @@ const startServer = async () => {
     });
     if (configObj.error) {
       console.log('Error loading configuration file.');
-      // immediateShutdown(-1);
+      gracefulShutdown();
     }
   } else {
     console.log('No node environment specified.');
-    // immediateShutdown(-1);
+    gracefulShutdown();
   }
   // Loading secrets
   const secrets = config();

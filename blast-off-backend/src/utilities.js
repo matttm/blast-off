@@ -1,3 +1,4 @@
+const { getConnection } = require("typeorm");
 const EntityNotFoundError = require('typeorm/error/EntityNotFoundError');
 const path = require('path');
 const glob = require('glob');
@@ -88,11 +89,22 @@ function onListening() {
     console.log('Listening on ' + bind);
 }
 
+/**
+ * Gracefully shutdown, closing the  db if open.
+ */
+function gracefulShutdown() {
+    console.log('Shutting down...');
+    const connection = getConnection();
+    // if (connection.)
+    process.exit();
+}
+
 module.exports = {
     findAllControllers,
     errorHandler,
     entityNotFoundErrorHandler,
     normalizePort,
     onError,
-    onListening
+    onListening,
+    gracefulShutdown
 };
