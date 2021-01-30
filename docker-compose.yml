@@ -2,26 +2,26 @@ version: '3'
 
 services:
 
-  # Create frontend container
-  frontend: # Name of our service
-    build: ./frontend # path to dockerfile
-    ports: # Port binding to host from docker container
-      - "3000:3000" # Bind port 3000 of host to 3000 of container
-    container_name: frontend-docker
-    restart: always # What to do if container crashes
-    links:
-      - backend
+  # # Create frontend container
+  # blast-off-frontend: # Name of our service
+    # build: ./blast-off-frontend
+    # ports: # Port binding to host from docker container
+      # - "3000:3000"
+    # container_name: blast-off-frontend
+    # restart: always
+    # links:
+      # - blast-off-backend
       
-  # Create backend container
-  blast-off-backend:
-    # Create backend container  
-    build: ./blast-off-backend
-    ports:
-      - "3000:3000"
-    container_name: blast-off-backend
-    restart: always
-    links:
-      - blast-off-db
+  # # Create backend container
+  # blast-off-backend:
+    # # Create backend container  
+    # build: ./blast-off-backend
+    # ports:
+      # - "8000:8000"
+    # container_name: blast-off-backend
+    # restart: always
+    # links:
+      # - blast-off-db
       
   # Create database container
   blast-off-db:
@@ -30,7 +30,7 @@ services:
    command: --default-authentication-plugin=mysql_native_password
    restart: always
    ports:
-     - 3389:3306
+     - 3306:3306
    environment:
      MYSQL_ROOT_PASSWORD: password
      MYSQL_DATABASE: blast-off-db
