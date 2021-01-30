@@ -95,7 +95,9 @@ function onListening(server) {
 function gracefulShutdown() {
     console.log('Shutting down...');
     const connection = getConnection();
-    // if (connection.)
+    if (connection.isConnected) {
+        connection.close();
+    }
     process.exit();
 }
 
