@@ -3,8 +3,9 @@
  * so 'quantity' refers to shares
  */
 class Position {
-    constructor(id, symbol, type, quantity, priceAtPurchase) {
+    constructor(id, created, symbol, type, quantity, priceAtPurchase) {
         this.id = id;
+        this.created = created;
         this.symbol = symbol;
         this.type = type;
         this.quantity = quantity;
