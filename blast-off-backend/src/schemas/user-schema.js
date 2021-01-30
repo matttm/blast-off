@@ -22,7 +22,7 @@ module.exports = EntitySchema({
         },
         lastName: {
             type: "varchar"
-        },
+        }
     },
     relations: {
         brokerageAccounts: {
