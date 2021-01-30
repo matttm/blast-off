@@ -9,6 +9,7 @@ const {createConnection} = require("typeorm");
 
 const indexRouter = require('./routes/index');
 const usersRouter = require('./routes/users');
+const {User} = require("./models/user");
 
 const getConfiguredHandler = async () => {
 
@@ -42,6 +43,14 @@ const getConfiguredHandler = async () => {
   console.log('Database connection established.');
 
   // TODO: create admin account here?
+  const userRepository = await connection.getRepository(User);
+  const admin = {
+    role: "admin"
+  };
+  await userRepository.save(admin);
+  console.log('Admin account created in database.');
+  const users = await userRepository.find();
+  console.log(`User Table: ${users}`);
 
   findAllControllers().map(applyController => applyController(primaryHandler));
   primaryHandler.use(entityNotFoundErrorHandler);

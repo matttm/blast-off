@@ -1,8 +1,8 @@
 
 class User {
-    constructor(id, created, role, firstName, lastName, brokerageAccounts) {
+    constructor(id, role, firstName, lastName, brokerageAccounts) {
         this.id = id;
-        this.created = created;
+        this.created = new Date().toDateString();
         this.role = role;
         this.firstName = firstName;
         this.lastName = lastName;

@@ -3,9 +3,9 @@
  * a user, where a user can have multiple accounts
  */
 class BrokerageAccount {
-    constructor(id, created, bankAccounts, buyingPower, positions) {
+    constructor(id, bankAccounts, buyingPower, positions) {
         this.id = id;
-        this.created = created;
+        this.created = new Date().toDateString();
         this.bankAccounts = bankAccounts;
         this.buyingPower = buyingPower;
         this.positions = positions;
