@@ -39,6 +39,10 @@ const getConfiguredHandler = async () => {
   });
 
   const connection = await createConnection();
+  console.log('Database connection established.');
+
+  // TODO: create admin account here?
+
   findAllControllers().map(applyController => applyController(primaryHandler));
   primaryHandler.use(entityNotFoundErrorHandler);
   primaryHandler.use(errorHandler);
