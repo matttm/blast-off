@@ -9,6 +9,7 @@ const {createConnection} = require("typeorm");
 
 const indexRouter = require('./routes/index');
 const usersRouter = require('./routes/users');
+const {gracefulShutdown} = require("./utilities");
 const {User} = require("./models/user");
 
 const getConfiguredHandler = async () => {
@@ -39,6 +40,7 @@ const getConfiguredHandler = async () => {
     res.render('error');
   });
 
+  console.log('Connecting to database...');
   const connection = await createConnection();
   console.log('Database connection established.');
 

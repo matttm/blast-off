@@ -11,5 +11,16 @@ module.exports = [{
     synchronize: true,
     entities: [
         "src/schemas/*.js"
-    ]
+    ],
+    subscribers: [
+        "src/subscribers/*.js"
+    ],
+    migrations: [
+        "src/migrations/*.js"
+    ],
+    cli: {
+        entitiesDir: "src/schemas",
+        migrationsDir: "src/migrations",
+        subscribersDir: "src/subscribers"
+    }
 }];
