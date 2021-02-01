@@ -1,15 +1,27 @@
+import {Column, Entity, OneToMany, PrimaryGeneratedColumn} from "typeorm";
+import {BrokerageAccount} from "./brokerage-account";
 
-class User {
-    constructor(id, role, firstName, lastName, brokerageAccounts) {
-        this.id = id;
+@Entity()
+export class User {
+    @PrimaryGeneratedColumn()
+    id: number;
+    @Column({
+        type: "date"
+    })
+    created: string;
+    @Column({
+        type: "varchar"
+    })
+    firstName: string;
+    @Column({
+        type: "varchar"
+    })
+    lastName: string;
+    @Column()
+    role: string;
+    @OneToMany(() => BrokerageAccount, brokerageAccount => brokerageAccount.user)
+    brokerageAccounts: BrokerageAccount[];
+    constructor() {
         this.created = new Date().toDateString();
-        this.role = role;
-        this.firstName = firstName;
-        this.lastName = lastName;
-        this.brokerageAccounts = brokerageAccounts;
     }
 }
-
-module.exports = {
-    User
-};

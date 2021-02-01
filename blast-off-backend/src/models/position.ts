@@ -2,9 +2,10 @@
  * Currently the only supported position type is 'stock',
  * so 'quantity' refers to shares
  */
-import {Column, ManyToOne, PrimaryGeneratedColumn} from "typeorm";
+import {Column, Entity, ManyToOne, PrimaryGeneratedColumn} from "typeorm";
 import {BrokerageAccount} from "./brokerage-account";
 
+@Entity()
 export class Position {
     @PrimaryGeneratedColumn()
     id: number;
