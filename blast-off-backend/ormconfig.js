@@ -10,17 +10,6 @@ module.exports = [{
     database: DB_DATABASE,
     synchronize: true,
     entities: [
-        "src/schemas/*.js"
-    ],
-    subscribers: [
-        "src/subscribers/*.js"
-    ],
-    migrations: [
-        "src/migrations/*.js"
-    ],
-    cli: {
-        entitiesDir: "src/schemas",
-        migrationsDir: "src/migrations",
-        subscribersDir: "src/subscribers"
-    }
+        __dirname + "/src/schemas/*.js"
+    ]
 }];

@@ -46,9 +46,8 @@ const getConfiguredHandler = async () => {
 
   // TODO: create admin account here?
   const userRepository = await connection.getRepository(User);
-  const admin = {
-    role: "admin"
-  };
+  const admin = new User(0, "admin", "Matt", "Maloney", null);
+
   await userRepository.save(admin);
   console.log('Admin account created in database.');
   const users = await userRepository.find();
