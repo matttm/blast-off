@@ -6,11 +6,10 @@ const {entityNotFoundErrorHandler} = require("./utilities");
 const {errorHandler} = require("./utilities");
 const {findAllControllers} = require("./utilities");
 const {createConnection} = require("typeorm");
+const {User} = require("./entities/user");
 
 const indexRouter = require('./routes/index');
 const usersRouter = require('./routes/users');
-const {gracefulShutdown} = require("./utilities");
-const {User} = require("./models/user");
 
 const getConfiguredHandler = async () => {
 
