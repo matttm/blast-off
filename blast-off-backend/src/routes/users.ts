@@ -1,4 +1,4 @@
-const express = require('express');
+import express from 'express';
 const router = express.Router();
 
 /* GET users listing. */
@@ -10,4 +10,4 @@ router.route('/')
       res.send('making user');
     });
 
-module.exports = router;
+export default router;

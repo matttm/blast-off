@@ -1,4 +1,4 @@
-const express = require('express');
+import express from 'express';
 const router = express.Router();
 
 /* GET home page. */
@@ -6,4 +6,4 @@ router.get('/', (req, res, next) => {
   res.render('index', { title: 'Blast Off API' });
 });
 
-module.exports = router;
+export  default router;

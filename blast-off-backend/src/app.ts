@@ -1,17 +1,17 @@
-const createError = require('http-errors');
-const express = require('express');
-const cookieParser = require('cookie-parser');
-const logger = require('morgan');
-const {entityNotFoundErrorHandler} = require("./utilities");
-const {errorHandler} = require("./utilities");
-const {findAllControllers} = require("./utilities");
-const {createConnection} = require("typeorm");
-const {User} = require("./entities/user");
+import createError from 'http-errors';
+import express from 'express';
+import cookieParser from 'cookie-parser';
+import logger from 'morgan';
+import {entityNotFoundErrorHandler} from "./utilities";
+import {errorHandler} from "./utilities";
+import {findAllControllers} from "./utilities";
+import {createConnection} from "typeorm";
+import {User} from "./entities/user";
 
-const indexRouter = require('./routes/index');
-const usersRouter = require('./routes/users');
+import indexRouter from './routes';
+import usersRouter from './routes/users';
 
-const getConfiguredHandler = async () => {
+export default async function getConfiguredHandler() {
 
 // TODO: should this actually be blastOffHandler?
   const primaryHandler = express();
@@ -45,7 +45,7 @@ const getConfiguredHandler = async () => {
 
   // TODO: create admin account here?
   const userRepository = await connection.getRepository(User);
-  const admin = new User(0, "admin", "Matt", "Maloney", null);
+  const admin = new User();
 
   await userRepository.save(admin);
   console.log('Admin account created in database.');
@@ -57,5 +57,3 @@ const getConfiguredHandler = async () => {
   primaryHandler.use(errorHandler);
   return primaryHandler;
 };
-
-module.exports = getConfiguredHandler;

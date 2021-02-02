@@ -3,11 +3,11 @@
 /**
  * Module dependencies.
  */
-const getConfiguredHandler = require('../app');
-const http = require('http');
-const { config } = require('dotenv');
-const path = require('path');
-const {onError, gracefulShutdown, onListening, normalizePort} = require("../utilities");
+import getConfiguredHandler from '../app';
+import http from 'http';
+import { config } from 'dotenv';
+import path from 'path';
+import {onError, gracefulShutdown, onListening, normalizePort} from "../utilities";
 
 const startServer = async () => {
   console.log('Starting server');
@@ -22,11 +22,11 @@ const startServer = async () => {
     });
     if (configObj.error) {
       console.log('Error loading configuration file.');
-      gracefulShutdown();
+      await gracefulShutdown();
     }
   } else {
     console.log('No node environment specified.');
-    gracefulShutdown();
+    await gracefulShutdown();
   }
   // Loading secrets
   const secrets = config();
@@ -52,7 +52,7 @@ const startServer = async () => {
    * Listen on provided port, on all network interfaces.
    */
   server.listen(port);
-  server.on('error', onError);
+  server.on('error', err => onError(port, err));
   server.on('listening', () => onListening(server));
 };
 
