@@ -5,8 +5,11 @@
   "scripts": {
     "dev": "cross-env NODE_ENV=development yarn start",
     "prod": "cross-env NODE_ENV=production yarn start",
-    "start": "npx yarn-run-all serve",
-    "serve": "ts-node ./src/bin/index.ts"
+    "start": "npx yarn-run-all build serve",
+    "serve": "node ./dist/bin/index.js",
+    "build": "npx yarn-run-all clean transpile",
+    "transpile": "tsc",
+    "clean": "rimraf dist"
   },
   "dependencies": {
     "cookie-parser": "~1.4.4",
