@@ -9,6 +9,8 @@ module.exports = [{
     password: DB_PASSWORD,
     database: DB_DATABASE,
     synchronize: true,
+    logging: "all",
+    logger: "file",
     entities: [
         __dirname + "/dist/entities/*.js"
     ]

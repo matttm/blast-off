@@ -1,4 +1,4 @@
-import {Column, Entity, OneToMany, PrimaryGeneratedColumn} from "typeorm";
+import {Column, Entity, JoinTable, OneToMany, PrimaryGeneratedColumn} from "typeorm";
 import {BrokerageAccount} from "./brokerage-account";
 
 @Entity()
@@ -6,7 +6,7 @@ export class User {
     @PrimaryGeneratedColumn()
     id: number;
     @Column({
-        type: "date"
+        type: "varchar"
     })
     created: string;
     @Column({
@@ -17,7 +17,9 @@ export class User {
         type: "varchar"
     })
     lastName: string;
-    @Column()
+    @Column({
+        type: "varchar"
+    })
     role: string;
     @OneToMany(() => BrokerageAccount, brokerageAccount => brokerageAccount.user)
     brokerageAccounts: BrokerageAccount[];

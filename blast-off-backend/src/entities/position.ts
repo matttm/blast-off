@@ -19,7 +19,7 @@ export class Position {
     })
     symbol: string;
     @Column({
-        type: "enum"
+        type: "varchar"
     })
     type: string;
     @Column()
