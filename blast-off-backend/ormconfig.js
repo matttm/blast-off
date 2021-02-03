@@ -10,6 +10,6 @@ module.exports = [{
     database: DB_DATABASE,
     synchronize: true,
     entities: [
-        __dirname + "/src/entities/*.ts"
+        __dirname + "/dist/entities/*.js"
     ]
 }];
