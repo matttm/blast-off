@@ -46,11 +46,14 @@ export default async function getConfiguredHandler() {
   // TODO: create admin account here?
   const userRepository = await connection.getRepository(User);
   const admin = new User();
-
+  // TODO: change these to an environment variable
+  admin.firstName = 'Matt';
+  admin.lastName = 'Maloney';
+  admin.role = 'administrator';
   await userRepository.save(admin);
   console.log('Admin account created in database.');
   const users = await userRepository.find();
-  console.log(`User Table: ${users}`);
+  console.log(`User Table: ${JSON.stringify(users)}`);
 
   findAllControllers().map(applyController => applyController(primaryHandler));
   primaryHandler.use(entityNotFoundErrorHandler);

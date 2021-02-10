@@ -1,4 +1,4 @@
-import {Column, Entity, JoinTable, OneToMany, PrimaryGeneratedColumn} from "typeorm";
+import {Column, Entity, OneToMany, PrimaryGeneratedColumn} from "typeorm";
 import {BrokerageAccount} from "./brokerage-account";
 
 @Entity()
@@ -21,7 +21,9 @@ export class User {
         type: "varchar"
     })
     role: string;
-    @OneToMany(() => BrokerageAccount, brokerageAccount => brokerageAccount.user)
+    @OneToMany(() => BrokerageAccount, brokerageAccount => brokerageAccount.user, {
+        nullable: true
+    })
     brokerageAccounts: BrokerageAccount[];
     constructor() {
         this.created = new Date().toDateString();
