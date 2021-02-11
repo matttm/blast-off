@@ -59,5 +59,6 @@ export default async function getConfiguredHandler() {
   findAllControllers().map(applyController => applyController(primaryHandler));
   primaryHandler.use(entityNotFoundErrorHandler);
   primaryHandler.use(errorHandler);
+  primaryHandler.use(express.json());
   return primaryHandler;
 };
