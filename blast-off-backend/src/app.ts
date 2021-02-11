@@ -10,6 +10,7 @@ import {User} from "./entities/user";
 
 import indexRouter from './routes';
 import usersRouter from './routes/users';
+import {roles} from "./enums";
 
 export default async function getConfiguredHandler() {
 
@@ -47,9 +48,9 @@ export default async function getConfiguredHandler() {
   const userRepository = await connection.getRepository(User);
   const admin = new User();
   // TODO: change these to an environment variable
-  admin.firstName = 'Matt';
-  admin.lastName = 'Maloney';
-  admin.role = 'administrator';
+  admin.firstName = process.env.ADMIN_FIRST_NAME || 'Matt';
+  admin.lastName = process.env.ADMIN_LAST_NAME || 'Maloney';
+  admin.role = roles.ADMINISTRATOR;
   await userRepository.save(admin);
   console.log('Admin account created in database.');
   const users = await userRepository.find();
