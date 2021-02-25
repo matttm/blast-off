@@ -50,8 +50,11 @@ export default async function getConfiguredHandler() {
   // TODO: change these to an environment variable
   admin.firstName = process.env.ADMIN_FIRST_NAME || 'Matt';
   admin.lastName = process.env.ADMIN_LAST_NAME || 'Maloney';
+  admin.username = process.env.ADMIN_USERNAME || 'matttm';
+  admin.password = process.env.ADMIN_PASSWORD || 'password';
   admin.role = roles.ADMINISTRATOR;
   await userRepository.save(admin);
+
   console.log('Admin account created in database.');
   const users = await userRepository.find();
   console.log(`User Table: ${JSON.stringify(users)}`);
