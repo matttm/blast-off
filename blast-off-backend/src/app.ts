@@ -9,6 +9,7 @@ import {createConnection} from "typeorm";
 import {User} from "./entities/user";
 
 import indexRouter from './routes';
+import sessionRoute from './routes/session';
 import usersRouter from './routes/users';
 import {roles} from "./enums";
 
@@ -22,6 +23,7 @@ export default async function getConfiguredHandler() {
   primaryHandler.use(cookieParser());
 
   primaryHandler.use('/', indexRouter);
+  primaryHandler.use('/session', sessionRoute);
   primaryHandler.use('/users', usersRouter);
 
 // catch 404 and forward to error handler
