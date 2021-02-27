@@ -1,1 +1,27 @@
-<p>login works!</p>
+<section>
+  <form #loginForm="ngForm" (ngSubmit)="onSubmit()">
+    <mat-form-field appearance="standard">
+      <mat-label>Username</mat-label>
+      <input
+        [(ngModel)]="model.username"
+        matInput
+        name="username"
+        required
+        type="text"
+        placeholder="matttm"
+      >
+    </mat-form-field>
+    <mat-form-field appearance="standard">
+      <mat-label>Password</mat-label>
+      <input
+        [(ngModel)]="model.password"
+        matInput
+        name="password"
+        required
+        type="text"
+        placeholder="*****"
+      >
+    </mat-form-field>
+    <button [disabled]="!loginForm.valid" mat-flat-button type="submit">Submit</button>
+  </form>
+</section>

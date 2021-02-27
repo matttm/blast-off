@@ -1,6 +1,24 @@
+@import '~@angular/material/prebuilt-themes/deeppurple-amber.css';
 
 * {
   margin: 0;
   padding: 0;
   box-sizing: border-box;
+}
+
+form {
+  display: flex;
+  flex-direction: column;
+  align-self: center;
+  justify-self: center;
+  justify-content: center;
+  align-items: center;
+}
+
+form > mat-form-field {
+  padding: 5px;
+}
+
+form > button {
+  padding: 10px;
 }
