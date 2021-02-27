@@ -1,13 +1,15 @@
 import { NgModule } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
-import {MatToolbarModule} from '@angular/material/toolbar';
 
-import { AppComponent } from './app.component';
+import { AppComponent } from './components/app/app.component';
 import { AppRoutingModule } from './app-routing.module';
+import {MatToolbarModule} from '@angular/material/toolbar';
+import { LoginComponent } from './components/login/login.component';
 
 @NgModule({
   declarations: [
-    AppComponent
+    AppComponent,
+    LoginComponent
   ],
   imports: [
     BrowserModule,
