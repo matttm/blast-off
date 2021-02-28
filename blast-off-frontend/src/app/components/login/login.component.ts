@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import {LoginService} from '../../services/login/login.service';
 
 interface LoginForm {
   username: string;
@@ -12,7 +13,7 @@ interface LoginForm {
 export class LoginComponent implements OnInit {
   model: LoginForm;
 
-  constructor() {
+  constructor(private loginService: LoginService) {
     this.model = {password: '', username: ''};
   }
 
