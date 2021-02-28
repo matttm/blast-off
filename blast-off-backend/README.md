@@ -1,8 +1,11 @@
 # Blast Off Backend
-# Description
+## Description
 This a backend that the blast off frontend proxies to. This is where authentication, data fetching, and stock prediction will be done.
-# Getting Started
+## Getting Started
 TBD
-# Packages
+## Packages
 - Node - v12.13.0
 - Express - v4.16.1
+
+## API
+The  backend's API is defined in ```API.md```.
