@@ -12,18 +12,22 @@ router.route('/')
     .post(async (req, res) => {
         const {
             username,
-            firstName,
-            lastName,
-            password,
-            role
+            password
         } = req.body;
-        // TODO: validate user
+        // if a needed arg is missing, reject
+        if (!username || !password) {
+            res.status(422).send();
+            return;
+        }
+        // if credentials don't match a user, reject
         if (! await isValidUser(username, password)) {
             res.status(401).send();
             return;
         }
-        // TODO: get userId
-        const userId = 0;
+        // otherwise generate a jwt
+        // TODO: get userId and role
+        const userId = 0,
+            role = 0;
         const payload = {
             userId,
             username,
