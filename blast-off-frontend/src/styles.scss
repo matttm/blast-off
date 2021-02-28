@@ -1,9 +1,13 @@
-@import '~@angular/material/prebuilt-themes/deeppurple-amber.css';
+@import 'theme';
 
 * {
   margin: 0;
   padding: 0;
   box-sizing: border-box;
+}
+
+mat-icon {
+  padding: 5px;
 }
 
 form {
