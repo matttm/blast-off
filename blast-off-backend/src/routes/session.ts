@@ -1,4 +1,4 @@
-import express, {json} from 'express';
+import express from 'express';
 import * as jwt from 'jsonwebtoken';
 import {getConnection} from "typeorm";
 

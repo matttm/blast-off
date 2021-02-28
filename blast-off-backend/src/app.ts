@@ -9,22 +9,17 @@ import {createConnection} from "typeorm";
 import {User} from "./entities/user";
 
 import indexRouter from './routes';
-import sessionRoute from './routes/session';
-import usersRouter from './routes/users';
+import getApiRouter from './routes/api';
 import {roles} from "./enums";
 
 export default async function getConfiguredHandler() {
 
-// TODO: should this actually be blastOffHandler?
   const primaryHandler = express();
   primaryHandler.use(logger('dev'));
   primaryHandler.use(express.json());
   primaryHandler.use(express.urlencoded({extended: false}));
   primaryHandler.use(cookieParser());
-
-  primaryHandler.use('/', indexRouter);
-  primaryHandler.use('/session', sessionRoute);
-  primaryHandler.use('/users', usersRouter);
+  primaryHandler.use(errorHandler);
 
 // catch 404 and forward to error handler
   primaryHandler.use(function (req, res, next) {
@@ -46,10 +41,8 @@ export default async function getConfiguredHandler() {
   const connection = await createConnection();
   console.log('Database connection established.');
 
-  // TODO: create admin account here?
   const userRepository = await connection.getRepository(User);
   const admin = new User();
-  // TODO: change these to an environment variable
   admin.firstName = process.env.ADMIN_FIRST_NAME || 'Matt';
   admin.lastName = process.env.ADMIN_LAST_NAME || 'Maloney';
   admin.username = process.env.ADMIN_USERNAME || 'matttm';
@@ -63,7 +56,10 @@ export default async function getConfiguredHandler() {
 
   findAllControllers().map(applyController => applyController(primaryHandler));
   primaryHandler.use(entityNotFoundErrorHandler);
-  primaryHandler.use(errorHandler);
-  primaryHandler.use(express.json());
+
+  // the api needs to be here after making db connection
+  primaryHandler.use('/', indexRouter);
+  primaryHandler.use('/api', await getApiRouter());
+
   return primaryHandler;
 };
