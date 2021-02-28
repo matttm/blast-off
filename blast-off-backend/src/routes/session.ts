@@ -10,6 +10,7 @@ const SESSION_COOKIE_KEY = "SESSIONID";
 /* GET home page. */
 router.route('/')
     .post(async (req, res) => {
+        console.log('Attempting to establish a connection');
         const {
             username,
             password
@@ -49,6 +50,7 @@ router.route('/')
             .json();
     })
     .delete((req, res) => {
+        console.log('Deleting an  established connection');
         res.clearCookie(SESSION_COOKIE_KEY).status(200);
     });
 

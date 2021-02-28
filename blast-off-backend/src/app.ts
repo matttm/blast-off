@@ -21,22 +21,6 @@ export default async function getConfiguredHandler() {
   primaryHandler.use(cookieParser());
   primaryHandler.use(errorHandler);
 
-// catch 404 and forward to error handler
-  primaryHandler.use(function (req, res, next) {
-    next(createError(404));
-  });
-
-// error handler
-  primaryHandler.use(function (err, req, res, next) {
-    // set locals, only providing error in development
-    res.locals.message = err.message;
-    res.locals.error = req.app.get('env') === 'development' ? err : {};
-
-    // render the error page
-    res.status(err.status || 500);
-    res.render('error');
-  });
-
   console.log('Connecting to database...');
   const connection = await createConnection();
   console.log('Database connection established.');
@@ -54,7 +38,7 @@ export default async function getConfiguredHandler() {
   const users = await userRepository.find();
   console.log(`User Table: ${JSON.stringify(users)}`);
 
-  findAllControllers().map(applyController => applyController(primaryHandler));
+  // findAllControllers().map(applyController => applyController(primaryHandler));
   primaryHandler.use(entityNotFoundErrorHandler);
 
   // the api needs to be here after making db connection
