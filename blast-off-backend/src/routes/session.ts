@@ -1,9 +1,9 @@
 import express from 'express';
 import * as jwt from 'jsonwebtoken';
-import {getConnection} from "typeorm";
+import {getUser} from "../services/user.service";
 
 const router = express.Router();
-const RSA_PRIVATE_KEY = process.env.RSA_PRIVATE_KEY || 'secret';
+const RSA_PRIVATE_KEY: string = process.env.RSA_PRIVATE_KEY || 'secret';
 const EXPIRES_IN = process.env.EXPIRES_IN || 126;
 const SESSION_COOKIE_KEY = "SESSIONID";
 
@@ -20,24 +20,23 @@ router.route('/')
             res.status(422).send();
             return;
         }
+        const ret = await getUser(username, password);
         // if credentials don't match a user, reject
-        if (! await isValidUser(username, password)) {
+        // if id does not exist, id is undefined
+        if (ret === undefined) {
             res.status(401).send();
             return;
         }
+        const {id, role} = ret;
         // otherwise generate a jwt
-        // TODO: get userId and role
-        const userId = 0,
-            role = 0;
         const payload = {
-            userId,
+            id,
             username,
             role
         };
-        const jwtBearerToken = jwt.sign(payload, RSA_PRIVATE_KEY, {
-            algorithm: 'RS256',
-            expiresIn: EXPIRES_IN,
-            subject: userId
+        const jwtBearerToken = jwt.sign(payload, 'secret', {
+            expiresIn: '2h',  // EXPIRES_IN as string,
+            subject: `${id}`
         });
         // set it in an HTTP Only + Secure Cookie
         res.cookie(SESSION_COOKIE_KEY, jwtBearerToken,
@@ -53,11 +52,5 @@ router.route('/')
         console.log('Deleting an  established connection');
         res.clearCookie(SESSION_COOKIE_KEY).status(200);
     });
-
-async function isValidUser(username: string, password: string): Promise<boolean> {
-    const userRepo = await getConnection().getRepository('User');
-    const user = await userRepo.find({ where: {username, password}});
-    return !!user;
-}
 
 export default router;
