@@ -12,5 +12,25 @@ describe('Session Router', () => {
             .post('/')
             .send();
         expect(response.status).toBe(422);
-    })
+    });
+
+    test('should return a 422 due to empty username', async () => {
+        const response = await request
+            .post('/')
+            .send({
+                username: '',
+                password: 'test'
+            });
+        expect(response.status).toBe(422);
+    });
+
+    test('should return a 422 due to empty password', async () => {
+        const response = await request
+            .post('/')
+            .send({
+                username: 'test',
+                password: ''
+            });
+        expect(response.status).toBe(422);
+    });
 });
