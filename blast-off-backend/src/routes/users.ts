@@ -14,29 +14,39 @@ export default async function getUsersRouter() {
         })
         .post(async (req, res, next) => {
             const user = new User();
-            const firstName = req.body.firstName;
-            const lastName = req.body.lastName;
-            // TODO: add pw field
-            // const password = req.body.password;
-            // TODO: need validation?
+            const {
+                username,
+                firstName,
+                lastName,
+                password
+            } = req.body;
+            if (!username || !firstName || !lastName || !password) {
+                res.status(422).send();
+            }
+            user.username = username;
             user.firstName = firstName;
             user.lastName = lastName;
+            user.password = password;
             user.role = roles.STANDARD;
-            // user.password = password;
-            res.json(user);
+            res.status(200).json(user);
         });
     /* Handling a specific user */
     router.route('/:id')
         .get(async (req, res, next) => {
+            // TODO: check status codes
             // TODO: use JWT for this instead?
-            const user = await userRepository.findOne();
-            res.json(user);
+            const user = await userRepository.find({ where: { id: req.params.id}});
+            res.status(200).json(user);
         })
-        .put((req, res, next) => {
-            res.send('modifying a resource');
+        .put(async (req, res, next) => {
+            const user = await userRepository.find({ where: { id: req.params.id}})[0];
+            userRepository.merge(user, req.body);
+            const results = await userRepository.save(user);
+            return res.status(200).send(results);
         })
-        .delete((req, res, next) => {
-            res.send('deleting a resource');
+        .delete(async (req, res, next) => {
+            const results = await userRepository.delete(req.params.id);
+            return res.status(200).send(results);
         });
     return router;
 }
