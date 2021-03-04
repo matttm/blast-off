@@ -37,8 +37,4 @@ export class LoginComponent implements OnInit {
       this.model.password
     ).subscribe(() => console.log('Logging in...'));
   }
-
-  onNavigate(url: string): void {
-    this.router.navigateByUrl(url);
-  }
 }

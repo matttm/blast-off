@@ -1,1 +1,41 @@
-<p>registration works!</p>
+<section>
+  <form (ngSubmit)="onSubmit()" [formGroup]="model">
+    <mat-form-field appearance="standard">
+      <mat-label>Username</mat-label>
+      <input
+        matInput
+        placeholder="scrappy"
+        name="username"
+        formControlName="username"
+      >
+    </mat-form-field>
+    <mat-form-field appearance="standard">
+      <mat-label>First Name</mat-label>
+      <input
+        matInput
+        placeholder="Matt"
+        name="firstName"
+        formControlName="firstName"
+      >
+    </mat-form-field>
+    <mat-form-field appearance="standard">
+      <mat-label>Last Name</mat-label>
+      <input
+        matInput
+        placeholder="Maloney"
+        name="lastName"
+        formControlName="lastName"
+      >
+    </mat-form-field>
+    <mat-form-field appearance="standard">
+      <mat-label>Password</mat-label>
+      <input
+        matInput
+        placeholder="secret"
+        name="password"
+        formControlName="password"
+      >
+    </mat-form-field>
+    <button [disabled]="!model.valid" mat-flat-button type="submit">Submit</button>
+  </form>
+</section>

@@ -24,5 +24,5 @@
     </mat-form-field>
     <button [disabled]="!loginForm.valid" mat-flat-button type="submit">Submit</button>
   </form>
-  <p>Don't have an account? <a (click)="onNavigate('registration')">Register</a></p>
+  <p>Don't have an account? <a routerLink="/registration" routerLinkActive="true">Register</a></p>
 </section>
