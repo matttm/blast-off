@@ -12,12 +12,14 @@ import {MatButtonModule} from '@angular/material/button';
 import {BrowserAnimationsModule} from '@angular/platform-browser/animations';
 import {HttpClientModule} from '@angular/common/http';
 import { RegistrationComponent } from './components/registration/registration.component';
+import { PasswordToggleDirective } from './directives/password-toggle.directive';
 
 @NgModule({
   declarations: [
     AppComponent,
     LoginComponent,
-    RegistrationComponent
+    RegistrationComponent,
+    PasswordToggleDirective
   ],
   imports: [
     BrowserAnimationsModule,
