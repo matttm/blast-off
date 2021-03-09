@@ -26,7 +26,7 @@ export default async function getConfiguredHandler() {
   console.log('Database connection established.');
 
   const userRepository = await connection.getRepository(User);
-  const admin = new User();
+  const admin = await userRepository.create();
   admin.firstName = process.env.ADMIN_FIRST_NAME || 'Matt';
   admin.lastName = process.env.ADMIN_LAST_NAME || 'Maloney';
   admin.username = process.env.ADMIN_USERNAME || 'matttm';

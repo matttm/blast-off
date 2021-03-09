@@ -3850,3 +3850,596 @@
 [2021-02-28T21:39:46.318Z][QUERY]: COMMIT
 [2021-02-28T21:39:46.341Z][QUERY]: SELECT `User`.`id` AS `User_id`, `User`.`created` AS `User_created`, `User`.`firstName` AS `User_firstName`, `User`.`username` AS `User_username`, `User`.`password` AS `User_password`, `User`.`lastName` AS `User_lastName`, `User`.`role` AS `User_role` FROM `user` `User`
 [2021-02-28T21:41:06.905Z][QUERY]: SELECT `User`.`id` AS `User_id`, `User`.`created` AS `User_created`, `User`.`firstName` AS `User_firstName`, `User`.`username` AS `User_username`, `User`.`password` AS `User_password`, `User`.`lastName` AS `User_lastName`, `User`.`role` AS `User_role` FROM `user` `User`
+[2021-03-09T19:09:24.560Z][INFO]: All classes found using provided glob pattern "C:\Users\Admin\workspace\blast-off\blast-off-backend/dist/entities/*.js" : "C:/Users/Admin/workspace/blast-off/blast-off-backend/dist/entities/bank-account.js,C:/Users/Admin/workspace/blast-off/blast-off-backend/dist/entities/brokerage-account.js,C:/Users/Admin/workspace/blast-off/blast-off-backend/dist/entities/position.js,C:/Users/Admin/workspace/blast-off/blast-off-backend/dist/entities/user.js"
+[2021-03-09T19:09:24.591Z][QUERY]: START TRANSACTION
+[2021-03-09T19:09:24.597Z][QUERY]: SELECT DATABASE() AS `db_name`
+[2021-03-09T19:09:24.602Z][QUERY]: 
+                SELECT
+                    `TABLE_SCHEMA`,
+                    `TABLE_NAME`
+                FROM
+                    `INFORMATION_SCHEMA`.`TABLES`
+                WHERE
+                    `TABLE_SCHEMA` = 'blast-off-db'
+                    AND
+                    `TABLE_NAME` = 'bank_account'
+                 UNION 
+                SELECT
+                    `TABLE_SCHEMA`,
+                    `TABLE_NAME`
+                FROM
+                    `INFORMATION_SCHEMA`.`TABLES`
+                WHERE
+                    `TABLE_SCHEMA` = 'blast-off-db'
+                    AND
+                    `TABLE_NAME` = 'position'
+                 UNION 
+                SELECT
+                    `TABLE_SCHEMA`,
+                    `TABLE_NAME`
+                FROM
+                    `INFORMATION_SCHEMA`.`TABLES`
+                WHERE
+                    `TABLE_SCHEMA` = 'blast-off-db'
+                    AND
+                    `TABLE_NAME` = 'brokerage_account'
+                 UNION 
+                SELECT
+                    `TABLE_SCHEMA`,
+                    `TABLE_NAME`
+                FROM
+                    `INFORMATION_SCHEMA`.`TABLES`
+                WHERE
+                    `TABLE_SCHEMA` = 'blast-off-db'
+                    AND
+                    `TABLE_NAME` = 'user'
+                
+[2021-03-09T19:09:24.603Z][QUERY]: 
+                SELECT
+                    *
+                FROM
+                    `INFORMATION_SCHEMA`.`COLUMNS`
+                WHERE
+                    `TABLE_SCHEMA` = 'blast-off-db'
+                    AND
+                    `TABLE_NAME` = 'bank_account'
+                 UNION 
+                SELECT
+                    *
+                FROM
+                    `INFORMATION_SCHEMA`.`COLUMNS`
+                WHERE
+                    `TABLE_SCHEMA` = 'blast-off-db'
+                    AND
+                    `TABLE_NAME` = 'position'
+                 UNION 
+                SELECT
+                    *
+                FROM
+                    `INFORMATION_SCHEMA`.`COLUMNS`
+                WHERE
+                    `TABLE_SCHEMA` = 'blast-off-db'
+                    AND
+                    `TABLE_NAME` = 'brokerage_account'
+                 UNION 
+                SELECT
+                    *
+                FROM
+                    `INFORMATION_SCHEMA`.`COLUMNS`
+                WHERE
+                    `TABLE_SCHEMA` = 'blast-off-db'
+                    AND
+                    `TABLE_NAME` = 'user'
+                
+[2021-03-09T19:09:24.604Z][QUERY]: SELECT * FROM (
+                SELECT
+                    *
+                FROM `INFORMATION_SCHEMA`.`KEY_COLUMN_USAGE` `kcu`
+                WHERE
+                    `kcu`.`TABLE_SCHEMA` = 'blast-off-db'
+                    AND
+                    `kcu`.`TABLE_NAME` = 'bank_account'
+             UNION 
+                SELECT
+                    *
+                FROM `INFORMATION_SCHEMA`.`KEY_COLUMN_USAGE` `kcu`
+                WHERE
+                    `kcu`.`TABLE_SCHEMA` = 'blast-off-db'
+                    AND
+                    `kcu`.`TABLE_NAME` = 'position'
+             UNION 
+                SELECT
+                    *
+                FROM `INFORMATION_SCHEMA`.`KEY_COLUMN_USAGE` `kcu`
+                WHERE
+                    `kcu`.`TABLE_SCHEMA` = 'blast-off-db'
+                    AND
+                    `kcu`.`TABLE_NAME` = 'brokerage_account'
+             UNION 
+                SELECT
+                    *
+                FROM `INFORMATION_SCHEMA`.`KEY_COLUMN_USAGE` `kcu`
+                WHERE
+                    `kcu`.`TABLE_SCHEMA` = 'blast-off-db'
+                    AND
+                    `kcu`.`TABLE_NAME` = 'user'
+            ) `kcu` WHERE `CONSTRAINT_NAME` = 'PRIMARY'
+[2021-03-09T19:09:24.605Z][QUERY]: 
+            SELECT
+                `SCHEMA_NAME`,
+                `DEFAULT_CHARACTER_SET_NAME` as `CHARSET`,
+                `DEFAULT_COLLATION_NAME` AS `COLLATION`
+            FROM `INFORMATION_SCHEMA`.`SCHEMATA`
+            
+[2021-03-09T19:09:24.606Z][QUERY]: 
+            SELECT
+                `s`.*
+            FROM (
+                SELECT
+                    *
+                FROM `INFORMATION_SCHEMA`.`STATISTICS`
+                WHERE
+                    `TABLE_SCHEMA` = 'blast-off-db'
+                    AND
+                    `TABLE_NAME` = 'bank_account'
+             UNION 
+                SELECT
+                    *
+                FROM `INFORMATION_SCHEMA`.`STATISTICS`
+                WHERE
+                    `TABLE_SCHEMA` = 'blast-off-db'
+                    AND
+                    `TABLE_NAME` = 'position'
+             UNION 
+                SELECT
+                    *
+                FROM `INFORMATION_SCHEMA`.`STATISTICS`
+                WHERE
+                    `TABLE_SCHEMA` = 'blast-off-db'
+                    AND
+                    `TABLE_NAME` = 'brokerage_account'
+             UNION 
+                SELECT
+                    *
+                FROM `INFORMATION_SCHEMA`.`STATISTICS`
+                WHERE
+                    `TABLE_SCHEMA` = 'blast-off-db'
+                    AND
+                    `TABLE_NAME` = 'user'
+            ) `s`
+            LEFT JOIN (
+                SELECT
+                    *
+                FROM `INFORMATION_SCHEMA`.`REFERENTIAL_CONSTRAINTS`
+                WHERE
+                    `CONSTRAINT_SCHEMA` = 'blast-off-db'
+                    AND
+                    `TABLE_NAME` = 'bank_account'
+             UNION 
+                SELECT
+                    *
+                FROM `INFORMATION_SCHEMA`.`REFERENTIAL_CONSTRAINTS`
+                WHERE
+                    `CONSTRAINT_SCHEMA` = 'blast-off-db'
+                    AND
+                    `TABLE_NAME` = 'position'
+             UNION 
+                SELECT
+                    *
+                FROM `INFORMATION_SCHEMA`.`REFERENTIAL_CONSTRAINTS`
+                WHERE
+                    `CONSTRAINT_SCHEMA` = 'blast-off-db'
+                    AND
+                    `TABLE_NAME` = 'brokerage_account'
+             UNION 
+                SELECT
+                    *
+                FROM `INFORMATION_SCHEMA`.`REFERENTIAL_CONSTRAINTS`
+                WHERE
+                    `CONSTRAINT_SCHEMA` = 'blast-off-db'
+                    AND
+                    `TABLE_NAME` = 'user'
+            ) `rc`
+                ON
+                    `s`.`INDEX_NAME` = `rc`.`CONSTRAINT_NAME`
+                    AND
+                    `s`.`TABLE_SCHEMA` = `rc`.`CONSTRAINT_SCHEMA`
+            WHERE
+                `s`.`INDEX_NAME` != 'PRIMARY'
+                AND
+                `rc`.`CONSTRAINT_NAME` IS NULL
+            
+[2021-03-09T19:09:24.607Z][QUERY]: 
+            SELECT
+                `kcu`.`TABLE_SCHEMA`,
+                `kcu`.`TABLE_NAME`,
+                `kcu`.`CONSTRAINT_NAME`,
+                `kcu`.`COLUMN_NAME`,
+                `kcu`.`REFERENCED_TABLE_SCHEMA`,
+                `kcu`.`REFERENCED_TABLE_NAME`,
+                `kcu`.`REFERENCED_COLUMN_NAME`,
+                `rc`.`DELETE_RULE` `ON_DELETE`,
+                `rc`.`UPDATE_RULE` `ON_UPDATE`
+            FROM (
+                SELECT
+                    *
+                FROM `INFORMATION_SCHEMA`.`KEY_COLUMN_USAGE` `kcu`
+                WHERE
+                    `kcu`.`TABLE_SCHEMA` = 'blast-off-db'
+                    AND
+                    `kcu`.`TABLE_NAME` = 'bank_account'
+             UNION 
+                SELECT
+                    *
+                FROM `INFORMATION_SCHEMA`.`KEY_COLUMN_USAGE` `kcu`
+                WHERE
+                    `kcu`.`TABLE_SCHEMA` = 'blast-off-db'
+                    AND
+                    `kcu`.`TABLE_NAME` = 'position'
+             UNION 
+                SELECT
+                    *
+                FROM `INFORMATION_SCHEMA`.`KEY_COLUMN_USAGE` `kcu`
+                WHERE
+                    `kcu`.`TABLE_SCHEMA` = 'blast-off-db'
+                    AND
+                    `kcu`.`TABLE_NAME` = 'brokerage_account'
+             UNION 
+                SELECT
+                    *
+                FROM `INFORMATION_SCHEMA`.`KEY_COLUMN_USAGE` `kcu`
+                WHERE
+                    `kcu`.`TABLE_SCHEMA` = 'blast-off-db'
+                    AND
+                    `kcu`.`TABLE_NAME` = 'user'
+            ) `kcu`
+            INNER JOIN (
+                SELECT
+                    *
+                FROM `INFORMATION_SCHEMA`.`REFERENTIAL_CONSTRAINTS`
+                WHERE
+                    `CONSTRAINT_SCHEMA` = 'blast-off-db'
+                    AND
+                    `TABLE_NAME` = 'bank_account'
+             UNION 
+                SELECT
+                    *
+                FROM `INFORMATION_SCHEMA`.`REFERENTIAL_CONSTRAINTS`
+                WHERE
+                    `CONSTRAINT_SCHEMA` = 'blast-off-db'
+                    AND
+                    `TABLE_NAME` = 'position'
+             UNION 
+                SELECT
+                    *
+                FROM `INFORMATION_SCHEMA`.`REFERENTIAL_CONSTRAINTS`
+                WHERE
+                    `CONSTRAINT_SCHEMA` = 'blast-off-db'
+                    AND
+                    `TABLE_NAME` = 'brokerage_account'
+             UNION 
+                SELECT
+                    *
+                FROM `INFORMATION_SCHEMA`.`REFERENTIAL_CONSTRAINTS`
+                WHERE
+                    `CONSTRAINT_SCHEMA` = 'blast-off-db'
+                    AND
+                    `TABLE_NAME` = 'user'
+            ) `rc`
+                ON
+                    `rc`.`CONSTRAINT_SCHEMA` = `kcu`.`CONSTRAINT_SCHEMA`
+                    AND
+                    `rc`.`TABLE_NAME` = `kcu`.`TABLE_NAME`
+                    AND
+                    `rc`.`CONSTRAINT_NAME` = `kcu`.`CONSTRAINT_NAME`
+            
+[2021-03-09T19:09:24.663Z][QUERY]: SELECT * FROM `INFORMATION_SCHEMA`.`COLUMNS` WHERE `TABLE_SCHEMA` = 'blast-off-db' AND `TABLE_NAME` = 'typeorm_metadata'
+[2021-03-09T19:09:24.672Z]creating a new table: bank_account
+[2021-03-09T19:09:24.675Z][QUERY]: CREATE TABLE `bank_account` (`id` int NOT NULL AUTO_INCREMENT, `accountNumber` int NOT NULL, `routingNumber` int NOT NULL, `brokerageAccountId` int NULL, PRIMARY KEY (`id`)) ENGINE=InnoDB
+[2021-03-09T19:09:24.822Z]creating a new table: position
+[2021-03-09T19:09:24.827Z][QUERY]: CREATE TABLE `position` (`id` int NOT NULL AUTO_INCREMENT, `created` varchar(255) NOT NULL, `symbol` varchar(4) NOT NULL, `type` varchar(255) NOT NULL, `quantity` int NOT NULL, `brokerageAccountId` int NULL, PRIMARY KEY (`id`)) ENGINE=InnoDB
+[2021-03-09T19:09:25.057Z]creating a new table: brokerage_account
+[2021-03-09T19:09:25.061Z][QUERY]: CREATE TABLE `brokerage_account` (`id` int NOT NULL AUTO_INCREMENT, `created` date NOT NULL, `buyingPower` int NOT NULL, `userId` int NULL, PRIMARY KEY (`id`)) ENGINE=InnoDB
+[2021-03-09T19:09:25.221Z]creating a new table: user
+[2021-03-09T19:09:25.225Z][QUERY]: CREATE TABLE `user` (`id` int NOT NULL AUTO_INCREMENT, `created` varchar(255) NOT NULL, `firstName` varchar(255) NOT NULL, `username` varchar(255) NOT NULL, `password` varchar(255) NOT NULL, `lastName` varchar(255) NOT NULL, `role` varchar(255) NOT NULL, PRIMARY KEY (`id`)) ENGINE=InnoDB
+[2021-03-09T19:09:25.432Z]creating a foreign keys: FK_80003896a1aade459bd564429ad on table "bank_account"
+[2021-03-09T19:09:25.439Z][QUERY]: ALTER TABLE `bank_account` ADD CONSTRAINT `FK_80003896a1aade459bd564429ad` FOREIGN KEY (`brokerageAccountId`) REFERENCES `brokerage_account`(`id`) ON DELETE NO ACTION ON UPDATE NO ACTION
+[2021-03-09T19:09:26.086Z]creating a foreign keys: FK_7f406853a861868d25b38ea6b15 on table "position"
+[2021-03-09T19:09:26.089Z][QUERY]: ALTER TABLE `position` ADD CONSTRAINT `FK_7f406853a861868d25b38ea6b15` FOREIGN KEY (`brokerageAccountId`) REFERENCES `brokerage_account`(`id`) ON DELETE NO ACTION ON UPDATE NO ACTION
+[2021-03-09T19:09:26.543Z]creating a foreign keys: FK_350328ec79a4261157df3554f44 on table "brokerage_account"
+[2021-03-09T19:09:26.546Z][QUERY]: ALTER TABLE `brokerage_account` ADD CONSTRAINT `FK_350328ec79a4261157df3554f44` FOREIGN KEY (`userId`) REFERENCES `user`(`id`) ON DELETE NO ACTION ON UPDATE NO ACTION
+[2021-03-09T19:09:27.000Z][QUERY]: COMMIT
+[2021-03-09T19:09:27.041Z][QUERY]: START TRANSACTION
+[2021-03-09T19:09:27.084Z][QUERY]: INSERT INTO `user`(`id`, `created`, `firstName`, `username`, `password`, `lastName`, `role`) VALUES (DEFAULT, ?, ?, ?, ?, ?, ?) -- PARAMETERS: ["Tue Mar 09 2021","Matt","matttm","password","Maloney","admin"]
+[2021-03-09T19:09:27.117Z][QUERY]: COMMIT
+[2021-03-09T19:09:27.162Z][QUERY]: SELECT `User`.`id` AS `User_id`, `User`.`created` AS `User_created`, `User`.`firstName` AS `User_firstName`, `User`.`username` AS `User_username`, `User`.`password` AS `User_password`, `User`.`lastName` AS `User_lastName`, `User`.`role` AS `User_role` FROM `user` `User`
+[2021-03-09T19:13:13.177Z][INFO]: All classes found using provided glob pattern "C:\Users\Admin\workspace\blast-off\blast-off-backend/dist/entities/*.js" : "C:/Users/Admin/workspace/blast-off/blast-off-backend/dist/entities/bank-account.js,C:/Users/Admin/workspace/blast-off/blast-off-backend/dist/entities/brokerage-account.js,C:/Users/Admin/workspace/blast-off/blast-off-backend/dist/entities/position.js,C:/Users/Admin/workspace/blast-off/blast-off-backend/dist/entities/user.js"
+[2021-03-09T19:13:13.201Z][QUERY]: START TRANSACTION
+[2021-03-09T19:13:13.207Z][QUERY]: SELECT DATABASE() AS `db_name`
+[2021-03-09T19:13:13.212Z][QUERY]: 
+                SELECT
+                    `TABLE_SCHEMA`,
+                    `TABLE_NAME`
+                FROM
+                    `INFORMATION_SCHEMA`.`TABLES`
+                WHERE
+                    `TABLE_SCHEMA` = 'blast-off-db'
+                    AND
+                    `TABLE_NAME` = 'bank_account'
+                 UNION 
+                SELECT
+                    `TABLE_SCHEMA`,
+                    `TABLE_NAME`
+                FROM
+                    `INFORMATION_SCHEMA`.`TABLES`
+                WHERE
+                    `TABLE_SCHEMA` = 'blast-off-db'
+                    AND
+                    `TABLE_NAME` = 'position'
+                 UNION 
+                SELECT
+                    `TABLE_SCHEMA`,
+                    `TABLE_NAME`
+                FROM
+                    `INFORMATION_SCHEMA`.`TABLES`
+                WHERE
+                    `TABLE_SCHEMA` = 'blast-off-db'
+                    AND
+                    `TABLE_NAME` = 'brokerage_account'
+                 UNION 
+                SELECT
+                    `TABLE_SCHEMA`,
+                    `TABLE_NAME`
+                FROM
+                    `INFORMATION_SCHEMA`.`TABLES`
+                WHERE
+                    `TABLE_SCHEMA` = 'blast-off-db'
+                    AND
+                    `TABLE_NAME` = 'user'
+                
+[2021-03-09T19:13:13.213Z][QUERY]: 
+                SELECT
+                    *
+                FROM
+                    `INFORMATION_SCHEMA`.`COLUMNS`
+                WHERE
+                    `TABLE_SCHEMA` = 'blast-off-db'
+                    AND
+                    `TABLE_NAME` = 'bank_account'
+                 UNION 
+                SELECT
+                    *
+                FROM
+                    `INFORMATION_SCHEMA`.`COLUMNS`
+                WHERE
+                    `TABLE_SCHEMA` = 'blast-off-db'
+                    AND
+                    `TABLE_NAME` = 'position'
+                 UNION 
+                SELECT
+                    *
+                FROM
+                    `INFORMATION_SCHEMA`.`COLUMNS`
+                WHERE
+                    `TABLE_SCHEMA` = 'blast-off-db'
+                    AND
+                    `TABLE_NAME` = 'brokerage_account'
+                 UNION 
+                SELECT
+                    *
+                FROM
+                    `INFORMATION_SCHEMA`.`COLUMNS`
+                WHERE
+                    `TABLE_SCHEMA` = 'blast-off-db'
+                    AND
+                    `TABLE_NAME` = 'user'
+                
+[2021-03-09T19:13:13.214Z][QUERY]: SELECT * FROM (
+                SELECT
+                    *
+                FROM `INFORMATION_SCHEMA`.`KEY_COLUMN_USAGE` `kcu`
+                WHERE
+                    `kcu`.`TABLE_SCHEMA` = 'blast-off-db'
+                    AND
+                    `kcu`.`TABLE_NAME` = 'bank_account'
+             UNION 
+                SELECT
+                    *
+                FROM `INFORMATION_SCHEMA`.`KEY_COLUMN_USAGE` `kcu`
+                WHERE
+                    `kcu`.`TABLE_SCHEMA` = 'blast-off-db'
+                    AND
+                    `kcu`.`TABLE_NAME` = 'position'
+             UNION 
+                SELECT
+                    *
+                FROM `INFORMATION_SCHEMA`.`KEY_COLUMN_USAGE` `kcu`
+                WHERE
+                    `kcu`.`TABLE_SCHEMA` = 'blast-off-db'
+                    AND
+                    `kcu`.`TABLE_NAME` = 'brokerage_account'
+             UNION 
+                SELECT
+                    *
+                FROM `INFORMATION_SCHEMA`.`KEY_COLUMN_USAGE` `kcu`
+                WHERE
+                    `kcu`.`TABLE_SCHEMA` = 'blast-off-db'
+                    AND
+                    `kcu`.`TABLE_NAME` = 'user'
+            ) `kcu` WHERE `CONSTRAINT_NAME` = 'PRIMARY'
+[2021-03-09T19:13:13.215Z][QUERY]: 
+            SELECT
+                `SCHEMA_NAME`,
+                `DEFAULT_CHARACTER_SET_NAME` as `CHARSET`,
+                `DEFAULT_COLLATION_NAME` AS `COLLATION`
+            FROM `INFORMATION_SCHEMA`.`SCHEMATA`
+            
+[2021-03-09T19:13:13.216Z][QUERY]: 
+            SELECT
+                `s`.*
+            FROM (
+                SELECT
+                    *
+                FROM `INFORMATION_SCHEMA`.`STATISTICS`
+                WHERE
+                    `TABLE_SCHEMA` = 'blast-off-db'
+                    AND
+                    `TABLE_NAME` = 'bank_account'
+             UNION 
+                SELECT
+                    *
+                FROM `INFORMATION_SCHEMA`.`STATISTICS`
+                WHERE
+                    `TABLE_SCHEMA` = 'blast-off-db'
+                    AND
+                    `TABLE_NAME` = 'position'
+             UNION 
+                SELECT
+                    *
+                FROM `INFORMATION_SCHEMA`.`STATISTICS`
+                WHERE
+                    `TABLE_SCHEMA` = 'blast-off-db'
+                    AND
+                    `TABLE_NAME` = 'brokerage_account'
+             UNION 
+                SELECT
+                    *
+                FROM `INFORMATION_SCHEMA`.`STATISTICS`
+                WHERE
+                    `TABLE_SCHEMA` = 'blast-off-db'
+                    AND
+                    `TABLE_NAME` = 'user'
+            ) `s`
+            LEFT JOIN (
+                SELECT
+                    *
+                FROM `INFORMATION_SCHEMA`.`REFERENTIAL_CONSTRAINTS`
+                WHERE
+                    `CONSTRAINT_SCHEMA` = 'blast-off-db'
+                    AND
+                    `TABLE_NAME` = 'bank_account'
+             UNION 
+                SELECT
+                    *
+                FROM `INFORMATION_SCHEMA`.`REFERENTIAL_CONSTRAINTS`
+                WHERE
+                    `CONSTRAINT_SCHEMA` = 'blast-off-db'
+                    AND
+                    `TABLE_NAME` = 'position'
+             UNION 
+                SELECT
+                    *
+                FROM `INFORMATION_SCHEMA`.`REFERENTIAL_CONSTRAINTS`
+                WHERE
+                    `CONSTRAINT_SCHEMA` = 'blast-off-db'
+                    AND
+                    `TABLE_NAME` = 'brokerage_account'
+             UNION 
+                SELECT
+                    *
+                FROM `INFORMATION_SCHEMA`.`REFERENTIAL_CONSTRAINTS`
+                WHERE
+                    `CONSTRAINT_SCHEMA` = 'blast-off-db'
+                    AND
+                    `TABLE_NAME` = 'user'
+            ) `rc`
+                ON
+                    `s`.`INDEX_NAME` = `rc`.`CONSTRAINT_NAME`
+                    AND
+                    `s`.`TABLE_SCHEMA` = `rc`.`CONSTRAINT_SCHEMA`
+            WHERE
+                `s`.`INDEX_NAME` != 'PRIMARY'
+                AND
+                `rc`.`CONSTRAINT_NAME` IS NULL
+            
+[2021-03-09T19:13:13.217Z][QUERY]: 
+            SELECT
+                `kcu`.`TABLE_SCHEMA`,
+                `kcu`.`TABLE_NAME`,
+                `kcu`.`CONSTRAINT_NAME`,
+                `kcu`.`COLUMN_NAME`,
+                `kcu`.`REFERENCED_TABLE_SCHEMA`,
+                `kcu`.`REFERENCED_TABLE_NAME`,
+                `kcu`.`REFERENCED_COLUMN_NAME`,
+                `rc`.`DELETE_RULE` `ON_DELETE`,
+                `rc`.`UPDATE_RULE` `ON_UPDATE`
+            FROM (
+                SELECT
+                    *
+                FROM `INFORMATION_SCHEMA`.`KEY_COLUMN_USAGE` `kcu`
+                WHERE
+                    `kcu`.`TABLE_SCHEMA` = 'blast-off-db'
+                    AND
+                    `kcu`.`TABLE_NAME` = 'bank_account'
+             UNION 
+                SELECT
+                    *
+                FROM `INFORMATION_SCHEMA`.`KEY_COLUMN_USAGE` `kcu`
+                WHERE
+                    `kcu`.`TABLE_SCHEMA` = 'blast-off-db'
+                    AND
+                    `kcu`.`TABLE_NAME` = 'position'
+             UNION 
+                SELECT
+                    *
+                FROM `INFORMATION_SCHEMA`.`KEY_COLUMN_USAGE` `kcu`
+                WHERE
+                    `kcu`.`TABLE_SCHEMA` = 'blast-off-db'
+                    AND
+                    `kcu`.`TABLE_NAME` = 'brokerage_account'
+             UNION 
+                SELECT
+                    *
+                FROM `INFORMATION_SCHEMA`.`KEY_COLUMN_USAGE` `kcu`
+                WHERE
+                    `kcu`.`TABLE_SCHEMA` = 'blast-off-db'
+                    AND
+                    `kcu`.`TABLE_NAME` = 'user'
+            ) `kcu`
+            INNER JOIN (
+                SELECT
+                    *
+                FROM `INFORMATION_SCHEMA`.`REFERENTIAL_CONSTRAINTS`
+                WHERE
+                    `CONSTRAINT_SCHEMA` = 'blast-off-db'
+                    AND
+                    `TABLE_NAME` = 'bank_account'
+             UNION 
+                SELECT
+                    *
+                FROM `INFORMATION_SCHEMA`.`REFERENTIAL_CONSTRAINTS`
+                WHERE
+                    `CONSTRAINT_SCHEMA` = 'blast-off-db'
+                    AND
+                    `TABLE_NAME` = 'position'
+             UNION 
+                SELECT
+                    *
+                FROM `INFORMATION_SCHEMA`.`REFERENTIAL_CONSTRAINTS`
+                WHERE
+                    `CONSTRAINT_SCHEMA` = 'blast-off-db'
+                    AND
+                    `TABLE_NAME` = 'brokerage_account'
+             UNION 
+                SELECT
+                    *
+                FROM `INFORMATION_SCHEMA`.`REFERENTIAL_CONSTRAINTS`
+                WHERE
+                    `CONSTRAINT_SCHEMA` = 'blast-off-db'
+                    AND
+                    `TABLE_NAME` = 'user'
+            ) `rc`
+                ON
+                    `rc`.`CONSTRAINT_SCHEMA` = `kcu`.`CONSTRAINT_SCHEMA`
+                    AND
+                    `rc`.`TABLE_NAME` = `kcu`.`TABLE_NAME`
+                    AND
+                    `rc`.`CONSTRAINT_NAME` = `kcu`.`CONSTRAINT_NAME`
+            
+[2021-03-09T19:13:13.318Z][QUERY]: SELECT VERSION() AS `version`
+[2021-03-09T19:13:13.324Z][QUERY]: SELECT * FROM `INFORMATION_SCHEMA`.`COLUMNS` WHERE `TABLE_SCHEMA` = 'blast-off-db' AND `TABLE_NAME` = 'typeorm_metadata'
+[2021-03-09T19:13:13.337Z][QUERY]: COMMIT
+[2021-03-09T19:13:13.349Z][QUERY]: START TRANSACTION
+[2021-03-09T19:13:13.358Z][QUERY]: INSERT INTO `user`(`id`, `created`, `firstName`, `username`, `password`, `lastName`, `role`) VALUES (DEFAULT, ?, ?, ?, ?, ?, ?) -- PARAMETERS: ["Tue Mar 09 2021","Matt","matttm","password","Maloney","admin"]
+[2021-03-09T19:13:13.365Z][QUERY]: COMMIT
+[2021-03-09T19:13:13.394Z][QUERY]: SELECT `User`.`id` AS `User_id`, `User`.`created` AS `User_created`, `User`.`firstName` AS `User_firstName`, `User`.`username` AS `User_username`, `User`.`password` AS `User_password`, `User`.`lastName` AS `User_lastName`, `User`.`role` AS `User_role` FROM `user` `User`
