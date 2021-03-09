@@ -10,10 +10,10 @@ export default async function getUsersRouter() {
     router.route('/')
         .get(async (req, res, next) => {
             const users = await userRepository.find();
-            res.json(users);
+            res.status(200).json(users);
         })
         .post(async (req, res, next) => {
-            const user = new User();
+            const user = await userRepository.create();
             const {
                 username,
                 firstName,
@@ -28,7 +28,8 @@ export default async function getUsersRouter() {
             user.lastName = lastName;
             user.password = password;
             user.role = roles.STANDARD;
-            res.status(200).json(user);
+            const result = await userRepository.save(user);
+            res.status(200).json(result);
         });
     /* Handling a specific user */
     router.route('/:id')
