@@ -19,11 +19,23 @@ export class BrokerageAccount {
         type: "int"
     })
     buyingPower: number;
-    @OneToMany(() => BankAccount, bankAccount => bankAccount.brokerageAccount)
+    @OneToMany(
+        () => BankAccount,
+        bankAccount => bankAccount.brokerageAccount,
+        { nullable: true }
+        )
     bankAccounts: BankAccount[];
-    @OneToMany(() => Position, position => position.brokerageAccount)
+    @OneToMany(
+        () => Position,
+        position => position.brokerageAccount,
+        { nullable: true }
+    )
     positions: Position[];
-    @ManyToOne(() => User, user => user.brokerageAccounts)
+    @ManyToOne(
+        () => User,
+        user => user.brokerageAccounts,
+        { nullable: true }
+    )
     user: User;
 
     constructor() {
