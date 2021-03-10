@@ -4,9 +4,9 @@ import {BrokerageAccount} from "../../entities/brokerage-account";
 @EntityRepository(BrokerageAccount)
 export class BrokerageAccountRepository extends Repository<BrokerageAccount> {
     async createAndSave(account: BrokerageAccount): Promise<number> {
-        const _account = new BrokerageAccount();
+        const _account = this.create();
         // all initialization should've been done in the constructor
-        await this.save(_account);
+        await this.manager.save(_account);
         return _account.id;
     }
 

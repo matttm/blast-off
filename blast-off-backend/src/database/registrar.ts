@@ -2,12 +2,15 @@ import {Connection, createConnection} from "typeorm";
 import {UserRepository} from "./repositories/user-repository";
 import {BrokerageAccountRepository} from "./repositories/brokerage-account-repository";
 
-let  _connection: Connection;
+let _connection: Connection;
 
-export async function connect(databaseFN: string) {
-    _connection = await createConnection();
+export async function connect() {
+    if (!connected()) {
+        _connection = await createConnection();
+    }
 }
-export function connected() {
+
+export function connected(): boolean {
     return typeof _connection !== 'undefined';
 }
 export function getUserRepository(): UserRepository {
