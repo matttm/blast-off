@@ -1,5 +1,6 @@
 import {EntityRepository, Repository} from "typeorm";
 import {User} from "../../entities/user";
+import {BrokerageAccount} from "../../entities/brokerage-account";
 
 @EntityRepository(User)
 export class UserRepository extends Repository<User> {
@@ -13,6 +14,18 @@ export class UserRepository extends Repository<User> {
         _user.brokerageAccounts = [];
         this.save(_user);
         return _user.id;
+    }
+
+    async addBrokerageAccountToUser(userId: number, account: BrokerageAccount): Promise<number | undefined> {
+        const user: User | undefined = await this.findOne({ where: { id: userId }});
+        if (user) {
+            user.brokerageAccounts.push(account);
+            this.save(user);
+            const lastIdx = user.brokerageAccounts.length;
+            return user.brokerageAccounts[lastIdx].id;
+        } else {
+            return undefined;
+        }
     }
 
     async getAllUsers(): Promise<User[]> {
