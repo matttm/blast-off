@@ -1,6 +1,9 @@
 import {Connection, createConnection} from "typeorm";
 import {UserRepository} from "./repositories/user-repository";
 import {BrokerageAccountRepository} from "./repositories/brokerage-account-repository";
+import {BankAccount} from "../entities/bank-account";
+import {BankAccountRepository} from "./repositories/bank-account-repository";
+import {PositionRepository} from "./repositories/position-repository";
 
 let _connection: Connection;
 
@@ -19,4 +22,12 @@ export function getUserRepository(): UserRepository {
 
 export function getNrokerageAccountRepository(): BrokerageAccountRepository {
     return _connection.getCustomRepository(BrokerageAccountRepository)
+}
+
+export function getBankAccountRepository(): BankAccountRepository {
+    return _connection.getCustomRepository(BankAccountRepository);
+}
+
+export function getPositionRepository(): PositionRepository {
+    return _connection.getCustomRepository(PositionRepository);
 }

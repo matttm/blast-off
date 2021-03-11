@@ -11,4 +11,5 @@ export class BankAccount {
     routingNumber: number;
     @ManyToOne(() => BrokerageAccount, brokerageAccount => brokerageAccount.bankAccounts)
     brokerageAccount: BrokerageAccount;
+    constructor() {}
 }
