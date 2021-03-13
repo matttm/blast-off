@@ -20,7 +20,7 @@ export function getUserRepository(): UserRepository {
     return _connection.getCustomRepository(UserRepository);
 }
 
-export function getNrokerageAccountRepository(): BrokerageAccountRepository {
+export function getBrokerageAccountRepository(): BrokerageAccountRepository {
     return _connection.getCustomRepository(BrokerageAccountRepository)
 }
 
