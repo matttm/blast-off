@@ -20,7 +20,7 @@ export class BrokerageAccountRepository extends Repository<BrokerageAccount> {
         return await this.find({ where: { user: { id: userId }}});
     }
 
-    async getAllBrokerageAccountsById(brokerageId: number): Promise<BrokerageAccount | undefined> {
+    async getBrokerageAccountById(brokerageId: number): Promise<BrokerageAccount | undefined> {
         return await this.findOne({ where: { id: brokerageId }});
     }
 

@@ -11,6 +11,7 @@ export class PositionRepository extends Repository<Position> {
         const _position = this.create();
         _position.symbol = position.symbol;
         _position.type =  position.type;
+        _position.quantity = position.quantity;
         _position.brokerageAccount = brokerageAccount;
         await this.manager.save(_position);
         return _position.id;
@@ -26,6 +27,14 @@ export class PositionRepository extends Repository<Position> {
 
     async getAllPositionsWithBrokerageId(brokerageId: number): Promise<Position[] | undefined> {
         return await this.find({ where: { brokerageAccount: { id: brokerageId } }});
+    }
+
+    async getAllPositionsWithUserIdBrokerageId(userId: number, brokerageId: number): Promise<Position[] | undefined> {
+        return await this.find({ where: { brokerageAccount: { id: brokerageId, user: { id: userId } } }});
+    }
+
+    async getAllPositionById(positionId: number): Promise<Position | undefined> {
+        return await this.findOne({ where: { id: positionId }});
     }
 
     async updateById(id: number, account: Position): Promise<number> {

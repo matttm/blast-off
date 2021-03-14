@@ -39,8 +39,8 @@ export default async function getConfiguredHandler() {
   primaryHandler.use(entityNotFoundErrorHandler);
 
   // the api needs to be here after making db connection
-  // primaryHandler.use('/', indexRouter);
-  // primaryHandler.use('/api', await getApiRouter());
+  primaryHandler.use('/', indexRouter);
+  primaryHandler.use('/api', await getApiRouter());
 
   return primaryHandler;
 };

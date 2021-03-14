@@ -20,6 +20,10 @@ export class BankAccountRepository extends Repository<BankAccount> {
         return await this.find();
     }
 
+    async getBankAccountById(bankId: number): Promise<BankAccount | undefined> {
+        return await this.findOne({ where: { id: bankId }});
+    }
+
     async getAllBankAccountsWithBrokerageId(brokerageId: number): Promise<BankAccount[] | undefined> {
         return await this.find({ where: { brokerageAccount: { id: brokerageId } }});
     }

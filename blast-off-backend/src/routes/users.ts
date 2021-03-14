@@ -8,8 +8,8 @@ const router = express.Router();
 
 export default async function getUsersRouter() {
 
-// initialize subroutes
-    router.use('/:userId', await getBrokerageAccountsRouter());
+    // initialize subroutes
+    router.use('/:userId/brokerage-accounts', await getBrokerageAccountsRouter());
 
     const userRepository = getUserRepository();
     /* GET users listing. */

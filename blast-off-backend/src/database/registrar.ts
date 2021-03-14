@@ -1,7 +1,6 @@
 import {Connection, createConnection} from "typeorm";
 import {UserRepository} from "./repositories/user-repository";
 import {BrokerageAccountRepository} from "./repositories/brokerage-account-repository";
-import {BankAccount} from "../entities/bank-account";
 import {BankAccountRepository} from "./repositories/bank-account-repository";
 import {PositionRepository} from "./repositories/position-repository";
 
