@@ -1,11 +1,13 @@
 import express from 'express';
 import * as jwt from 'jsonwebtoken';
+import {getUserRepository} from "../database/registrar";
 
 const router = express.Router();
 const RSA_PRIVATE_KEY: string = process.env.RSA_PRIVATE_KEY || 'secret';
 const EXPIRES_IN = process.env.EXPIRES_IN || 126;
 const SESSION_COOKIE_KEY = "SESSIONID";
 
+const userRepository = getUserRepository();
 /* GET home page. */
 router.route('/')
     .post(async (req, res) => {
@@ -19,10 +21,10 @@ router.route('/')
             res.status(422).send();
             return;
         }
-        const ret = await getUser(username, password);
+        const ret = await userRepository.getUserByCredentials(username, password);
         // if credentials don't match a user, reject
         // if id does not exist, id is undefined
-        if (ret === undefined) {
+        if (!ret) {
             res.status(401).send();
             return;
         }
