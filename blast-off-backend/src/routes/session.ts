@@ -1,6 +1,5 @@
 import express from 'express';
 import * as jwt from 'jsonwebtoken';
-import {getUser} from "../services/user.service";
 
 const router = express.Router();
 const RSA_PRIVATE_KEY: string = process.env.RSA_PRIVATE_KEY || 'secret';

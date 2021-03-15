@@ -1,6 +1,6 @@
 import express from "express";
 import sessionRoute from "./session";
-import getUsersRouter from "./users";
+import getUsersRouter from "../controllers/users";
 
 export default async function getApiRouter() {
     const router = express.Router();
