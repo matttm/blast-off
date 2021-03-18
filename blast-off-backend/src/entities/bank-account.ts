@@ -5,6 +5,8 @@ import {BrokerageAccount} from "./brokerage-account";
 export class BankAccount {
     @PrimaryGeneratedColumn()
     id: number;
+    // TODO: change these to strings do there can be leading zeros
+    // TODO: add created field?
     @Column()
     accountNumber: number;
     @Column()
