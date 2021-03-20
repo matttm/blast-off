@@ -1,4 +1,4 @@
-import {Connection, createConnection} from "typeorm";
+import {Connection, createConnection, Repository} from "typeorm";
 import {UserRepository} from "./repositories/user-repository";
 import {BrokerageAccountRepository} from "./repositories/brokerage-account-repository";
 import {BankAccountRepository} from "./repositories/bank-account-repository";
@@ -15,8 +15,9 @@ export async function connect() {
 export function connected(): boolean {
     return typeof _connection !== 'undefined';
 }
+
 export function getUserRepository(): UserRepository {
-    return _connection.getCustomRepository(UserRepository);
+    return getRepositoryIfConnected(UserRepository);
 }
 
 export function getBrokerageAccountRepository(): BrokerageAccountRepository {
@@ -29,4 +30,12 @@ export function getBankAccountRepository(): BankAccountRepository {
 
 export function getPositionRepository(): PositionRepository {
     return _connection.getCustomRepository(PositionRepository);
+}
+
+function getRepositoryIfConnected(repo): Repository<any> {
+    if (connected()) {
+        return _connection.getCustomRepository(repo);
+    } else {
+        throw new Error('Database is not connected');
+    }
 }
