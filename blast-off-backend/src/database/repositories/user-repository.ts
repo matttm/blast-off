@@ -21,7 +21,7 @@ export class UserRepository extends Repository<User> {
         const user: User | undefined = await this.getUserById(userId);
         if (user) {
             user.brokerageAccounts.push(account);
-            this.save(user);
+            await this.save(user);
             const lastIdx = user.brokerageAccounts.length;
             return user.brokerageAccounts[lastIdx].id;
         } else {

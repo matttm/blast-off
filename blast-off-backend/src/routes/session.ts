@@ -1,13 +1,13 @@
 import express from 'express';
 import * as jwt from 'jsonwebtoken';
-import {getUserRepository} from "../database/registrar";
+import * as registrar from "../database/registrar";
 
 const router = express.Router();
 const RSA_PRIVATE_KEY: string = process.env.RSA_PRIVATE_KEY || 'secret';
 const EXPIRES_IN = process.env.EXPIRES_IN || 126;
 const SESSION_COOKIE_KEY = "SESSIONID";
 
-const userRepository = getUserRepository();
+const userRepository = registrar.getUserRepository();
 /* GET home page. */
 router.route('/')
     .post(async (req, res) => {

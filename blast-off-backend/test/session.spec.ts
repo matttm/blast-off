@@ -1,9 +1,11 @@
 import {initRoute} from './test-utilities';
 import sessionRouter from '../src/routes/session';
-import * as userservice from '../src/services/user.service';
+import * as registrar from '../src/database/registrar';
 import {roles} from '../src/enums';
 
 describe('Session Router', () => {
+    let userRepositorySpy;
+    let registrarSpy;
     const testUser = {
         id: 1,
         username: 'jerry',
@@ -14,8 +16,14 @@ describe('Session Router', () => {
     const promisedUser = Promise.resolve(testUser);
     let request;
     beforeAll(() => {
+        userRepositorySpy = jasmine.createSpyObj('UserRepository', ['getUserByCredentials']);
+        registrarSpy = jest.spyOn(registrar, 'getUserRepository').mockReturnValue(userRepositorySpy);
         request = initRoute(sessionRouter);
     });
+
+    afterAll(() => {
+        registrarSpy.mockRestore();
+    })
 
     test('should return a 422 on a POST request without credentials', async () => {
         const response = await request
@@ -45,8 +53,7 @@ describe('Session Router', () => {
     });
 
     test('should return 401 when user doesn\'t exist', async () => {
-        const spy = jest.spyOn(userservice, 'getUser');
-        spy.mockReturnValue(promisedUnd);
+        userRepositorySpy.gdtUserByCredentials.and.returnValue(promisedUnd);
         const response = await request
             .post('/')
             .send({
@@ -54,12 +61,10 @@ describe('Session Router', () => {
                 password: 'notfound'
             });
         expect(response.status).toBe(401);
-        spy.mockRestore();
     });
 
     test('should return 201 and a cookie when user does exist', async () => {
-        const spy = jest.spyOn(userservice, 'getUser');
-        spy.mockReturnValue(promisedUser);
+        userRepositorySpy.gdtUserByCredentials.and.returnValue(promisedUser);
         const response = await request
             .post('/')
             .send({
@@ -67,7 +72,5 @@ describe('Session Router', () => {
                 password: testUser.password
             });
         expect(response.status).toBe(201);
-        // expect(response.cookie.size).toBe(1);
-        spy.mockRestore();
     })
 });
