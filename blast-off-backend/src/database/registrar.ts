@@ -17,19 +17,19 @@ export function connected(): boolean {
 }
 
 export function getUserRepository(): UserRepository {
-    return getRepositoryIfConnected(UserRepository);
+    return getRepositoryIfConnected(UserRepository) as UserRepository;
 }
 
 export function getBrokerageAccountRepository(): BrokerageAccountRepository {
-    return _connection.getCustomRepository(BrokerageAccountRepository)
+    return getRepositoryIfConnected(BrokerageAccountRepository) as BrokerageAccountRepository
 }
 
 export function getBankAccountRepository(): BankAccountRepository {
-    return _connection.getCustomRepository(BankAccountRepository);
+    return getRepositoryIfConnected(BankAccountRepository) as BankAccountRepository;
 }
 
 export function getPositionRepository(): PositionRepository {
-    return _connection.getCustomRepository(PositionRepository);
+    return getRepositoryIfConnected(PositionRepository) as PositionRepository;
 }
 
 function getRepositoryIfConnected(repo): Repository<any> {
