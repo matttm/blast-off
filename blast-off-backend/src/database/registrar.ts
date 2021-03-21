@@ -1,4 +1,4 @@
-import {Connection, createConnection, Repository} from "typeorm";
+import {Connection, createConnection, ObjectType} from "typeorm";
 import {UserRepository} from "./repositories/user-repository";
 import {BrokerageAccountRepository} from "./repositories/brokerage-account-repository";
 import {BankAccountRepository} from "./repositories/bank-account-repository";
@@ -32,7 +32,7 @@ export function getPositionRepository(): PositionRepository {
     return getRepositoryIfConnected(PositionRepository) as PositionRepository;
 }
 
-function getRepositoryIfConnected(repo): Repository<any> {
+function getRepositoryIfConnected<T>(repo: ObjectType<T>): T {
     if (connected()) {
         return _connection.getCustomRepository(repo);
     } else {

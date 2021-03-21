@@ -19,6 +19,7 @@ describe('Session Router', () => {
         userRepositorySpy = jasmine.createSpyObj('UserRepository', ['getUserByCredentials']);
         registrarSpy = jest.spyOn(registrar, 'getUserRepository').mockReturnValue(userRepositorySpy);
         request = initRoute(sessionRouter);
+        registrar.connect();
     });
 
     afterAll(() => {
