@@ -1,8 +1,5 @@
 import {connect, connected, getUserRepository, disconnect} from "../../src/database/registrar";
 import * as typeorm from 'typeorm';
-import {Connection} from "typeorm";
-import {UserRepository} from "../../src/database/repositories/user-repository";
-import {get} from "http";
 
 describe('Registrar', () => {
     let connectionSpy;
@@ -24,7 +21,12 @@ describe('Registrar', () => {
         expect(connected()).toBeFalsy();
     });
 
-    it('should be connected after connect', async () => {
+    it('should not be affected without connecting first', () => {
+        disconnect();
+        expect(connected()).toBeFalsy();
+    });
+
+    it('should be connected after connect and disconnected after disconnect', async () => {
         await connect();
         expect(connected()).toBeTruthy();
         await disconnect();
@@ -35,7 +37,7 @@ describe('Registrar', () => {
         expect(getUserRepository).toThrowError();
     });
 
-    it('should return truthy since connected', async () => {
+    it('should return repository since connected', async () => {
         await connect();
         expect(getUserRepository()).toBeTruthy();
     });
