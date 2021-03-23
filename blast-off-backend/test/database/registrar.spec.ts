@@ -1,4 +1,4 @@
-import {connect, connected, getUserRepository, disconnect} from "../../src/database/registrar";
+import {connect, isConnected, getUserRepository, disconnect} from "../../src/database/registrar";
 import * as typeorm from 'typeorm';
 
 describe('Registrar', () => {
@@ -18,19 +18,19 @@ describe('Registrar', () => {
     });
 
     it('should not be connected on start', () => {
-        expect(connected()).toBeFalsy();
+        expect(isConnected()).toBeFalsy();
     });
 
     it('should not be affected without connecting first', () => {
         disconnect();
-        expect(connected()).toBeFalsy();
+        expect(isConnected()).toBeFalsy();
     });
 
     it('should be connected after connect and disconnected after disconnect', async () => {
         await connect();
-        expect(connected()).toBeTruthy();
+        expect(isConnected()).toBeTruthy();
         await disconnect();
-        expect(connected()).toBeFalsy();
+        expect(isConnected()).toBeFalsy();
     });
 
     it('should throw since not connected', () => {
