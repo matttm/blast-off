@@ -4,7 +4,7 @@ import {BrokerageAccountRepository} from "./repositories/brokerage-account-repos
 import {BankAccountRepository} from "./repositories/bank-account-repository";
 import {PositionRepository} from "./repositories/position-repository";
 
-let _connection: Connection;
+let _connection: Connection | null = null;
 
 export async function connect() {
     if (!connected()) {
@@ -12,8 +12,16 @@ export async function connect() {
     }
 }
 
+export async function disconnect() {
+    if (connected()) {
+        // @ts-ignore
+        await _connection.close();
+        _connection = null;
+    }
+}
+
 export function connected(): boolean {
-    return typeof _connection !== 'undefined';
+    return _connection !== null;
 }
 
 export function getUserRepository(): UserRepository {
@@ -34,6 +42,7 @@ export function getPositionRepository(): PositionRepository {
 
 function getRepositoryIfConnected<T>(repo: ObjectType<T>): T {
     if (connected()) {
+        // @ts-ignore
         return _connection.getCustomRepository(repo);
     } else {
         throw new Error('Database is not connected');
