@@ -1,19 +1,25 @@
 import express from 'express';
-import {getRepository} from "typeorm";
-import {User} from "../entities/user";
 import {roles} from "../enums";
+import {getUserRepository} from "../database/registrar";
+import {User} from "../entities/user";
+import getBrokerageAccountsRouter from "./brokerage-accounts";
+
 const router = express.Router();
 
 export default async function getUsersRouter() {
-    const userRepository = await getRepository(User);
+
+    // initialize subroutes
+    router.use('/:userId/brokerage-accounts', await getBrokerageAccountsRouter());
+
+    const userRepository = getUserRepository();
     /* GET users listing. */
     router.route('/')
         .get(async (req, res, next) => {
-            const users = await userRepository.find();
+            const users = await userRepository.getAllUsers();
             res.status(200).json(users);
         })
         .post(async (req, res, next) => {
-            const user = await userRepository.create();
+            const user = new User();
             const {
                 username,
                 firstName,
@@ -28,25 +34,26 @@ export default async function getUsersRouter() {
             user.lastName = lastName;
             user.password = password;
             user.role = roles.STANDARD;
-            const result = await userRepository.save(user);
+            const result = await userRepository.createAndSave(user);
             res.status(200).json(result);
         });
     /* Handling a specific user */
-    router.route('/:id')
+    router.route('/:userId')
         .get(async (req, res, next) => {
             // TODO: check status codes
             // TODO: use JWT for this instead?
-            const user = await userRepository.find({ where: { id: req.params.id}});
+            const id = parseInt(req.params.userId);
+            const user = await userRepository.getUserById(id);
             res.status(200).json(user);
         })
         .put(async (req, res, next) => {
-            const user = await userRepository.find({ where: { id: req.params.id}})[0];
-            userRepository.merge(user, req.body);
-            const results = await userRepository.save(user);
-            return res.status(200).send(results);
+            const id = parseInt(req.params.userId);
+            await userRepository.updateById(id, req.body);
+            return res.status(200).send();
         })
         .delete(async (req, res, next) => {
-            const results = await userRepository.delete(req.params.id);
+            const id = parseInt(req.params.userId);
+            const results = await userRepository.removeById(id);
             return res.status(200).send(results);
         });
     return router;
