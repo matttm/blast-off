@@ -1,6 +1,6 @@
 import express from 'express';
 import getBankAccountsRouter from "./bank-accounts.route";
-import getPositionsRouter from "./positions";
+import getPositionsRouter from "./positions.route";
 import BrokerageAccountsController from "../controllers/brokerage-accounts.controller";
 
 export default async function getBrokerageAccountsRouter() {
