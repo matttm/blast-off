@@ -1,5 +1,5 @@
 import express from 'express';
-import getBankAccountsRouter from "./bank-accounts";
+import getBankAccountsRouter from "./bank-accounts.route";
 import getPositionsRouter from "./positions";
 import BrokerageAccountsController from "../controllers/brokerage-accounts.controller";
 
