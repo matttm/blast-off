@@ -2,9 +2,9 @@ import {roles} from "../enums";
 import {User} from "../entities/user";
 import * as registrar from "../database/registrar";
 
-class UsersController {
+export default class UsersController {
 
-    userRepository = registrar.getUserRepository();
+    private userRepository = registrar.getUserRepository();
 
     async getUsers(req, res, next) {
         const users = await this.userRepository.getAllUsers();
@@ -52,5 +52,3 @@ class UsersController {
         return res.status(200).send(results);
     }
 }
-
-module.exports = UsersController;
