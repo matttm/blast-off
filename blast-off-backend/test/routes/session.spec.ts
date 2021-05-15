@@ -1,5 +1,5 @@
 import {initRoute} from '../test-utilities';
-import sessionRouter from '../../src/routes/session';
+import sessionRouter from '../../src/routes/session.route';
 import * as registrar from '../../src/database/registrar';
 import {roles} from '../../src/enums';
 
