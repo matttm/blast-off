@@ -1,0 +1,14 @@
+#title {
+  display: flex;
+  flex-direction: row;
+}
+
+#banner-buttons {
+  display: flex;
+}
+
+.login-actions {
+  display: flex;
+  flex-direction: row;
+  justify-content: right;
+}

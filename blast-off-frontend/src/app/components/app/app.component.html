@@ -1,8 +1,19 @@
 
 
 <mat-toolbar color="primary" class="expanded-toolbar">
-  <p>🚀</p>
-  <h1>{{title}}</h1>
+  <div id="banner-buttons">
+    <div id="title">
+      <p>🚀</p>
+      <h1>{{title}}</h1>
+    </div>
+    <div *ngIf="loginService.isLoggedIn; else notLoggedIn" class="login-actions">
+      <h3>Logout</h3>
+    </div>
+    <ng-template #notLoggedIn class="login-actions">
+      <h3>Login</h3>
+      <h3>Register</h3>
+    </ng-template>
+  </div>
 </mat-toolbar>
 
 <router-outlet></router-outlet>
