@@ -9,7 +9,7 @@ const transceiver = new Transceiver();
 wss.on('connection', (ws, req) => {
     console.log(`Connection request from: ${req.connection.remoteAddress}`);
     ws.on('message', (data) => {
-        console.log('data: ' + data);
+        console.log('data: ', data);
         const json = JSON.parse(data);
         const action = json.action;
         const ticker = json.ticker;

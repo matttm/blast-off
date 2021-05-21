@@ -13,6 +13,7 @@
   "author": "matttm",
   "license": "ISC",
   "dependencies": {
+    "ccxws": "^0.43.1",
     "ws": "^7.4.5"
   }
 }

@@ -1,43 +1,39 @@
+const ccxws = require('ccxws');
+
 class Transceiver {
     constructor() {
+        this.exchange = new ccxws.CoinbasePro();
         this.tickers = {};
-        this.brokerId = setInterval(() => { this.broker() }, 1000);
-    }
-    
-    subscribe(subscriber, ticker) {
-        console.log(`subscribing to ${ticker}`);
-        this.tickers[ticker].subscribers.push(subscriber);
-    }
-    unsubscribe(subscriber, ticker) {
-        console.log(`unsubscribing from ${ticker}`);
-        this.tickers[ticker].subscribers.push(subscriber);
     }
 
-    removeBroker() {
-        clearInterval(this.brokerId);
+    subscribe(subscriber, ticker) {
+        console.log(`subscribing to ${ticker}`);
+        this.exchange.on('ticker', ticker => this.forwardTicker(subscriber, ticker));
+        //TODO: get market from ticker
+        const market = {
+            id: "BTCUSDT", // remote_id used by the exchange
+            base: "BTC", // standardized base symbol for Bitcoin
+            quote: "USDT", // standardized quote symbol for Tether
+        };
+        this.tickers[ticker] = market;
+        this.exchange.subscribeTicker();
+    }
+
+    unsubscribe(subscriber, ticker) {
+        console.log(`unsubscribing from ${ticker}`);
+        const market = this.tickers[ticker];
+        delete this.tickers[ticker];
+        this.exchange.unsubscribeTicker(market);
     }
 
     publish(publisher, channel, message) {
         this.tickers[channel].message = message;
     }
 
-    broker() {
-        for (const channel in this.tickers) {
-            if (this.tickers.hasOwnProperty(channel)) {
-                const channelObj = this.tickers[channel];
-                if (channelObj.message) {
-                    console.log(`found message: ${channelObj.message} in ${channel}`);
-
-                    channelObj.subscribers.forEach(subscriber => {
-                        subscriber.send(JSON.stringify({
-                            message: channelObj.message
-                        }));
-                    });
-
-                    channelObj.message = '';
-                }
-            }
-        }
+    forwardTicker(subscriber, ticker) {
+        console.log('Sending ticker update');
+        subscriber.send(ticker);
     }
 }
+
 module.exports = Transceiver;
