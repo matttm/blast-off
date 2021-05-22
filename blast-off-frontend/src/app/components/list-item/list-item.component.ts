@@ -1,6 +1,5 @@
 import {Component, Input, OnDestroy, OnInit} from '@angular/core';
 import {MarketService} from '../../services/market/market.service';
-import {tap} from 'rxjs/operators';
 
 @Component({
   selector: 'app-list-item',
@@ -12,10 +11,18 @@ export class ListItemComponent implements OnInit, OnDestroy {
   @Input()
   tickerId: string;
   ticker$: any;
+  displayedColumns: string[];
 
   constructor(private marketService: MarketService) { }
 
   ngOnInit(): void {
+    this.displayedColumns = [
+      'base',
+      'last',
+      'open',
+      'high',
+      'low'
+    ];
     this.ticker$ = this.marketService.subscribe(this.tickerId);
     this.ticker$.subscribe(
       msg => console.log('message received: ' + JSON.stringify(msg)),

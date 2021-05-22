@@ -16,6 +16,8 @@ import { PasswordToggleDirective } from './directives/password-toggle.directive'
 import { MarketComponent } from './components/market/market.component';
 import { ListItemComponent } from './components/list-item/list-item.component';
 import {MatExpansionModule} from '@angular/material/expansion';
+import {MatTableModule} from "@angular/material/table";
+import {MatPaginatorModule} from "@angular/material/paginator";
 
 @NgModule({
   declarations: [
@@ -36,6 +38,8 @@ import {MatExpansionModule} from '@angular/material/expansion';
     MatExpansionModule,
     MatInputModule,
     MatButtonModule,
+    MatTableModule,
+    MatPaginatorModule,
     MatToolbarModule,
     ReactiveFormsModule
   ],

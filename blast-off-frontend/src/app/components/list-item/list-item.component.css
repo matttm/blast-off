@@ -8,3 +8,8 @@
 .list-item-header-item {
   padding: 10px;
 }
+
+table.mat-table {
+  display: table;
+  width: 95%;
+}
