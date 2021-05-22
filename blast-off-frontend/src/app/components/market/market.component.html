@@ -1,0 +1,11 @@
+
+<section>
+  <h3 id="market-heading">
+    Market
+  </h3>
+  <mat-accordion id="market-list">
+    <div class="market-item" *ngFor="let tickerId of tickerIds">
+      <app-list-item [tickerId]="tickerId"></app-list-item>
+    </div>
+  </mat-accordion>
+</section>

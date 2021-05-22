@@ -1,3 +1,4 @@
 export const environment = {
-  production: true
+  production: true,
+  CRYPTO_API: 'ws://localhost:3232'
 };

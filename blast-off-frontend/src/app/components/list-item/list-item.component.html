@@ -1,0 +1,14 @@
+
+  <mat-expansion-panel *ngIf="ticker$ | async as ticker" hideToggle>
+    <mat-expansion-panel-header>
+      <mat-panel-title class="list-item-header">
+        <div class="list-item-header-item">
+          {{ ticker.base }}
+        </div>
+        <div class="list-item-header-item">
+          {{ ticker.last }}
+        </div>
+      </mat-panel-title>
+    </mat-expansion-panel-header>
+    <p>This is the primary content of the panel.</p>
+  </mat-expansion-panel>

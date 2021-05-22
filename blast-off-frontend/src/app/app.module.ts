@@ -13,13 +13,18 @@ import {BrowserAnimationsModule} from '@angular/platform-browser/animations';
 import {HttpClientModule} from '@angular/common/http';
 import { RegistrationComponent } from './components/registration/registration.component';
 import { PasswordToggleDirective } from './directives/password-toggle.directive';
+import { MarketComponent } from './components/market/market.component';
+import { ListItemComponent } from './components/list-item/list-item.component';
+import {MatExpansionModule} from '@angular/material/expansion';
 
 @NgModule({
   declarations: [
     AppComponent,
     LoginComponent,
     RegistrationComponent,
-    PasswordToggleDirective
+    PasswordToggleDirective,
+    MarketComponent,
+    ListItemComponent
   ],
   imports: [
     BrowserAnimationsModule,
@@ -28,6 +33,7 @@ import { PasswordToggleDirective } from './directives/password-toggle.directive'
     AppRoutingModule,
     FormsModule,
     MatFormFieldModule,
+    MatExpansionModule,
     MatInputModule,
     MatButtonModule,
     MatToolbarModule,

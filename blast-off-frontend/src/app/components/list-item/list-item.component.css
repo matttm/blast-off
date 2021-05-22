@@ -1,0 +1,10 @@
+
+.list-item-header {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+}
+
+.list-item-header-item {
+  padding: 10px;
+}
