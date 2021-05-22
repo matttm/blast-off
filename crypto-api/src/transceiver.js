@@ -2,7 +2,7 @@ const ccxws = require('ccxws');
 
 class Transceiver {
     constructor() {
-        this.exchange = new ccxws.CoinbasePro();
+        this.exchange = new ccxws.Binance();
         this.tickers = {};
     }
 
@@ -16,7 +16,7 @@ class Transceiver {
             quote: "USDT", // standardized quote symbol for Tether
         };
         this.tickers[ticker] = market;
-        this.exchange.subscribeTicker();
+        this.exchange.subscribeTicker(market);
     }
 
     unsubscribe(subscriber, ticker) {
@@ -32,7 +32,7 @@ class Transceiver {
 
     forwardTicker(subscriber, ticker) {
         console.log('Sending ticker update');
-        subscriber.send(ticker);
+        subscriber.send(JSON.stringify(ticker));
     }
 }
 
