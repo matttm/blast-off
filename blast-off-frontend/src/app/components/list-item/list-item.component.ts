@@ -42,7 +42,7 @@ export class ListItemComponent implements OnInit, OnDestroy {
     this.router.navigate([
       `market`,
       this.tickerId
-    ], ticker).then(r => console.log('navigating to asset'));
+    ], {...ticker}).then(r => console.log('navigating to asset'));
   }
   ngOnDestroy(): void {
     this.marketService.unsubscribe(this.tickerId);
