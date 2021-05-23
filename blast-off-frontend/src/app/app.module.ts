@@ -18,6 +18,7 @@ import { ListItemComponent } from './components/list-item/list-item.component';
 import {MatExpansionModule} from '@angular/material/expansion';
 import {MatTableModule} from "@angular/material/table";
 import {MatPaginatorModule} from "@angular/material/paginator";
+import { AssetComponent } from './components/asset/asset.component';
 
 @NgModule({
   declarations: [
@@ -26,7 +27,8 @@ import {MatPaginatorModule} from "@angular/material/paginator";
     RegistrationComponent,
     PasswordToggleDirective,
     MarketComponent,
-    ListItemComponent
+    ListItemComponent,
+    AssetComponent
   ],
   imports: [
     BrowserAnimationsModule,
