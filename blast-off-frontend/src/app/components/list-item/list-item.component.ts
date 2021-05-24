@@ -40,7 +40,7 @@ export class ListItemComponent implements OnInit, OnDestroy {
 
   onButtonClick(ticker): void {
     this.router.navigate([
-      `market`,
+      `assets`,
       this.tickerId
     ], {...ticker}).then(r => console.log('navigating to asset'));
   }

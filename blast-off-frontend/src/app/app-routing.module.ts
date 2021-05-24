@@ -4,6 +4,7 @@ import {LoginComponent} from './components/login/login.component';
 import {RegistrationComponent} from './components/registration/registration.component';
 import {MarketComponent} from './components/market/market.component';
 import {AssetComponent} from './components/asset/asset.component';
+import {AssetContainerComponent} from './components/asset-container/asset-container.component';
 
 const routes: Routes = [
   { path: '', redirectTo: 'market', pathMatch: 'full' },
@@ -15,8 +16,14 @@ const routes: Routes = [
     children: []
   },
   {
-    path: 'market/:tokenId',
-    component: AssetComponent
+    path: 'assets',
+    component: AssetContainerComponent,
+    children: [
+      {
+        path: ':tokenId',
+        component: AssetComponent
+      }
+    ]
   }
 ];
 
