@@ -1,4 +1,5 @@
 const ccxws = require('ccxws');
+const config = require('./config');
 
 class Transceiver {
     constructor() {
@@ -10,11 +11,7 @@ class Transceiver {
         console.log(`subscribing to ${ticker}`);
         this.exchange.on('ticker', ticker => this.forwardTicker(subscriber, ticker));
         //TODO: get market from ticker
-        const market = {
-            id: "BTCUSDT", // remote_id used by the exchange
-            base: "BTC", // standardized base symbol for Bitcoin
-            quote: "USDT", // standardized quote symbol for Tether
-        };
+        const market = config.tickers[ticker]?.market;
         this.tickers[ticker] = market;
         this.exchange.subscribeTicker(market);
     }

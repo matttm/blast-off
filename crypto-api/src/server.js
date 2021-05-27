@@ -1,9 +1,16 @@
 const ws = require('ws');
+const http = require('http');
+const express = require('express');
 const Transceiver = require('./transceiver');
 const WebSocketServer = ws.Server;
 
 const port = process.env.WS_PORT || 3232;
-const wss = new WebSocketServer({ port });
+const handler = express();
+handler.use(express.json());
+handler.use(express.urlencoded({ extended: true }));
+
+const server = http.createServer(handler);
+const wss = new WebSocketServer({ server: server });
 const transceiver = new Transceiver();
 
 wss.on('connection', (ws, req) => {
@@ -29,3 +36,6 @@ wss.on('connection', (ws, req) => {
         console.log('Stopping client connection.');
     });
 });
+
+server.listen(port, () => console.log(`Listening on port ${port}`));
+server.on('listening', () => null);
