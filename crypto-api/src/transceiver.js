@@ -7,19 +7,17 @@ class Transceiver {
         this.tickers = {};
     }
 
-    subscribe(subscriber, ticker) {
-        console.log(`subscribing to ${ticker}`);
+    subscribe(subscriber, market) {
+        console.log(`subscribing to ${market}`);
         this.exchange.on('ticker', ticker => this.forwardTicker(subscriber, ticker));
-        //TODO: get market from ticker
-        const market = config.tickers[ticker]?.market;
-        this.tickers[ticker] = market;
+        this.tickers[market] = market;
         this.exchange.subscribeTicker(market);
     }
 
-    unsubscribe(subscriber, ticker) {
-        console.log(`unsubscribing from ${ticker}`);
-        const market = this.tickers[ticker];
-        delete this.tickers[ticker];
+    unsubscribe(subscriber, market) {
+        console.log(`unsubscribing from ${market}`);
+        // const market = this.tickers[market];
+        delete this.tickers[market];
         this.exchange.unsubscribeTicker(market);
     }
 

@@ -1,13 +1,13 @@
 import { TestBed } from '@angular/core/testing';
 
-import { MarketService } from './market.service';
+import { MarketStreamService } from './market-stream.service';
 
 describe('MarketService', () => {
-  let service: MarketService;
+  let service: MarketStreamService;
 
   beforeEach(() => {
     TestBed.configureTestingModule({});
-    service = TestBed.inject(MarketService);
+    service = TestBed.inject(MarketStreamService);
   });
 
   it('should be created', () => {

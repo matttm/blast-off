@@ -2,15 +2,24 @@ const ws = require('ws');
 const http = require('http');
 const express = require('express');
 const Transceiver = require('./transceiver');
+const tickersConfig = require('./config');
 const WebSocketServer = ws.Server;
 
 const port = process.env.WS_PORT || 3232;
 const handler = express();
 handler.use(express.json());
 handler.use(express.urlencoded({ extended: true }));
+handler.get(
+    '/markets',
+    (req, res) => {
+        return res.status(200).json({
+            tickersConfig
+        })
+    }
+)
 
-const server = http.createServer(handler);
-const wss = new WebSocketServer({ server: server });
+// const server = http.createServer(handler);
+const wss = new WebSocketServer({ server: handler });
 const transceiver = new Transceiver();
 
 wss.on('connection', (ws, req) => {
@@ -19,14 +28,14 @@ wss.on('connection', (ws, req) => {
         console.log('data: ', data);
         const json = JSON.parse(data);
         const action = json.action;
-        const ticker = json.ticker;
+        const market = json.market;
 
         switch (action) {
             case 'SUBSCRIBE':
-                transceiver.subscribe(ws, ticker);
+                transceiver.subscribe(ws, market);
                 break;
             case 'UNSUBSCRIBE':
-                transceiver.unsubscribe(ws, ticker);
+                transceiver.unsubscribe(ws, market);
                 break;
             default:
                 console.log(`Unknown request: ${action}`);
@@ -37,5 +46,6 @@ wss.on('connection', (ws, req) => {
     });
 });
 
-server.listen(port, () => console.log(`Listening on port ${port}`));
-server.on('listening', () => null);
+handler.listen(port, () => {
+    console.log(`Listening on port ${port}`);
+});
