@@ -14,7 +14,7 @@ handler.get(
     (req, res) => {
         console.log('bah');
         return res.status(200).json({
-            tickersConfig
+            ...tickersConfig
         })
     }
 )
