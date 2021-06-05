@@ -12,6 +12,7 @@ handler.use(express.urlencoded({ extended: true }));
 handler.get(
     '/markets',
     (req, res) => {
+        console.log('bah');
         return res.status(200).json({
             tickersConfig
         })
