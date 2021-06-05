@@ -3,9 +3,12 @@
   <h3 id="market-heading">
     Market
   </h3>
-  <mat-accordion id="market-list">
-    <div class="market-item" *ngFor="let tickerId of tickerIds">
-      <app-list-item [tickerId]="tickerId"></app-list-item>
-    </div>
-  </mat-accordion>
+  <table id="market-table">
+    <tr>
+      <th *ngFor="let col of tableCols">
+        {{ col }}
+      </th>
+    </tr>
+    <tr app-list-item *ngFor="let tickerData of tickers$ | async" [tickerData]="tickerData"></tr>
+  </table>
 </section>

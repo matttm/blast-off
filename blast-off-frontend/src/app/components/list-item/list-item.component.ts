@@ -1,33 +1,32 @@
 import {Component, Input, OnDestroy, OnInit} from '@angular/core';
-import {MarketService} from '../../services/market/market.service';
-import {Router} from "@angular/router";
+import {MarketStreamService} from '../../services/market-stream/market-stream.service';
+import {Router} from '@angular/router';
 
 @Component({
-  selector: 'app-list-item',
+  // tslint:disable-next-line:component-selector
+  selector: 'tr[app-list-item]',
   templateUrl: './list-item.component.html',
   styleUrls: ['./list-item.component.css']
 })
 export class ListItemComponent implements OnInit, OnDestroy {
 
   @Input()
-  tickerId: string;
+  tickerData: string;
   ticker$: any;
   displayedColumns: string[];
 
   constructor(
-    private marketService: MarketService,
+    private marketService: MarketStreamService,
     private router: Router
   ) { }
 
+  // get marketCap(): string {
+  //   return '1 T';
+  // }
+
   ngOnInit(): void {
-    this.displayedColumns = [
-      'base',
-      'last',
-      'open',
-      'high',
-      'low'
-    ];
-    this.ticker$ = this.marketService.subscribe(this.tickerId);
+    // @ts-ignore
+    this.ticker$ = this.marketService.subscribe(this.tickerData.market);
     // this.ticker$.subscribe(
     //   msg => console.log('message received: ' + JSON.stringify(msg)),
     //   // Called whenever there is a message from the server
@@ -39,12 +38,13 @@ export class ListItemComponent implements OnInit, OnDestroy {
   }
 
   onButtonClick(ticker): void {
-    this.router.navigate([
-      `assets`,
-      this.tickerId
-    ], {...ticker}).then(r => console.log('navigating to asset'));
+    // this.router.navigate([
+    //   `assets`,
+    //   this.tickerId
+    // ], {...ticker}).then(r => console.log('navigating to asset'));
   }
   ngOnDestroy(): void {
-    this.marketService.unsubscribe(this.tickerId);
+    // @ts-ignore
+    this.marketService.unsubscribe(this.tickerData.market);
   }
 }

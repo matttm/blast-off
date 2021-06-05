@@ -1,6 +1,6 @@
 import {Component, OnDestroy, OnInit} from '@angular/core';
 import {ActivatedRoute} from '@angular/router';
-import {MarketService} from '../../services/market/market.service';
+import {MarketStreamService} from '../../services/market-stream/market-stream.service';
 import {startWith, tap} from 'rxjs/operators';
 import {Observable} from 'rxjs';
 
@@ -15,7 +15,7 @@ export class AssetComponent implements OnInit, OnDestroy {
   public displayedColumns: string[];
 
   constructor(
-    private marketService: MarketService,
+    private marketService: MarketStreamService,
     private route: ActivatedRoute
   ) {
     this.displayedColumns = [

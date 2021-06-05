@@ -11,7 +11,7 @@ export class MarketStreamService {
   private socket$: WebSocketSubject<any>;
 
   constructor() {
-    this.socket$ = webSocket(environment.CRYPTO_API);
+    this.socket$ = webSocket(environment.CRYPTO_WS_API);
   }
 
   get messages$(): Observable<any> {

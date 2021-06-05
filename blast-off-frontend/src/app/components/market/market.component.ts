@@ -1,4 +1,7 @@
 import { Component, OnInit } from '@angular/core';
+import {MarketService} from '../../services/market/market.service';
+import {Observable} from 'rxjs';
+import {map, tap} from 'rxjs/operators';
 
 @Component({
   selector: 'app-market',
@@ -7,11 +10,17 @@ import { Component, OnInit } from '@angular/core';
 })
 export class MarketComponent implements OnInit {
 
-  tickerIds: string[];
-  constructor() {
-    this.tickerIds = [
-      'BTC',
-      'BTC'
+  tickers$: Observable<any[]>;
+  tableCols: string[];
+  constructor(private  marketService: MarketService) {
+    this.tickers$ = marketService.getMarketMetaData()
+      .pipe(
+        tap(console.log),
+        map(marketData => marketData.tickers)
+      );
+    this.tableCols = [
+      'Name',
+      'Price'
     ];
   }
 
