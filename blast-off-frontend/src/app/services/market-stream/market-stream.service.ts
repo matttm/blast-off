@@ -18,18 +18,19 @@ export class MarketStreamService {
     return this.socket$.asObservable();
   }
 
-  subscribe(ticker): Observable<any> {
+  subscribe(market): Observable<any> {
+    console.log(`Subscribing to ${JSON.stringify(market)}`);
     this.socket$.next({
       action: 'SUBSCRIBE',
-      ticker
+      market
     });
     return this.messages$;
   }
 
-  unsubscribe(ticker): void {
+  unsubscribe(market): void {
     this.socket$.next({
       action: 'UNSUBSCRIBE',
-      ticker
+      market
     });
   }
 }
