@@ -19,8 +19,8 @@ handler.get(
     }
 )
 
-// const server = http.createServer(handler);
-const wss = new WebSocketServer({ server: handler });
+const server = http.createServer(handler);
+const wss = new WebSocketServer({ server: server });
 const transceiver = new Transceiver();
 
 wss.on('connection', (ws, req) => {
@@ -47,6 +47,6 @@ wss.on('connection', (ws, req) => {
     });
 });
 
-handler.listen(port, () => {
+server.listen(port, () => {
     console.log(`Listening on port ${port}`);
 });

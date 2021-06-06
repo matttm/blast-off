@@ -10,8 +10,12 @@ class Transceiver {
     subscribe(subscriber, market) {
         console.log(`subscribing to ${market}`);
         this.exchange.on('ticker', ticker => this.forwardTicker(subscriber, ticker));
-        this.tickers[market] = market;
-        this.exchange.subscribeTicker(market);
+        if (this.isMarket(market)) {
+            this.tickers[market] = market;
+            this.exchange.subscribeTicker(market);
+        } else {
+            console.error('Cannot subscribe wth non-market object');
+        }
     }
 
     unsubscribe(subscriber, market) {
@@ -28,6 +32,12 @@ class Transceiver {
     forwardTicker(subscriber, ticker) {
         console.log('Sending ticker update');
         subscriber.send(JSON.stringify(ticker));
+    }
+
+    isMarket(market) {
+        return market.hasOwnProperty('id') &&
+            market.hasOwnProperty('base') &&
+            market.hasOwnProperty('quote');
     }
 }
 
