@@ -5,11 +5,16 @@ class Transceiver {
     constructor() {
         this.exchange = new ccxws.Binance();
         this.tickers = {};
+        this.intervalId = 9;
     }
 
     subscribe(subscriber, market) {
         console.log(`subscribing to ${market}`);
-        this.exchange.on('ticker', ticker => this.forwardTicker(subscriber, ticker));
+        if (process.env.OFFLINE) {
+            this.intervalId = this.useMockData(subscriber, market);
+        } else {
+            this.exchange.on('ticker', ticker => this.forwardTicker(subscriber, ticker));
+        }
         if (this.isMarket(market)) {
             this.tickers[market] = market;
             this.exchange.subscribeTicker(market);
@@ -32,6 +37,17 @@ class Transceiver {
     forwardTicker(subscriber, ticker) {
         console.log('Sending ticker update');
         subscriber.send(JSON.stringify(ticker));
+    }
+
+    useMockData(subscriber, market) {
+        return setInterval(() => {
+            console.log('Sending mock ticker update');
+            subscriber.send(JSON.stringify({
+                base: market.id,
+                open: '',
+                last: `${Math.random()}`
+            }));
+        }, process.env.FREQUENCY || 1000);
     }
 
     isMarket(market) {
