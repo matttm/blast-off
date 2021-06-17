@@ -13,6 +13,14 @@ export class LoginService {
   }
 
   /**
+   * Determines whether user is logged in
+   */
+  get isLoggedIn(): boolean {
+    // TODO: how to store whether logged in?
+    return false;
+  }
+
+  /**
    * This try to authenticate the provided username
    * and password with the backend and establish a session
    * which should add a JWT in form of a cookie

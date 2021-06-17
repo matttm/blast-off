@@ -5,7 +5,7 @@ import {entityNotFoundErrorHandler, errorHandler} from "./utilities";
 import {User} from "./entities/user";
 
 import indexRouter from './routes';
-import getApiRouter from './routes/api';
+import getApiRouter from './routes/api.route';
 import {roles} from "./enums";
 import {connect, getUserRepository} from "./database/registrar";
 

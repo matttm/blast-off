@@ -2,15 +2,14 @@ import express from 'express';
 import * as jwt from 'jsonwebtoken';
 import * as registrar from "../database/registrar";
 
-const router = express.Router();
 const RSA_PRIVATE_KEY: string = process.env.RSA_PRIVATE_KEY || 'secret';
 const EXPIRES_IN = process.env.EXPIRES_IN || 126;
 const SESSION_COOKIE_KEY = "SESSIONID";
 
-const userRepository = registrar.getUserRepository();
-/* GET home page. */
-router.route('/')
-    .post(async (req, res) => {
+export default class SessionsController {
+    private userRepository = registrar.getUserRepository();
+
+    async createSession(req, res) {
         console.log('Attempting to establish a connection');
         const {
             username,
@@ -21,7 +20,7 @@ router.route('/')
             res.status(422).send();
             return;
         }
-        const ret = await userRepository.getUserByCredentials(username, password);
+        const ret = await this.userRepository.getUserByCredentials(username, password);
         // if credentials don't match a user, reject
         // if id does not exist, id is undefined
         if (!ret) {
@@ -48,10 +47,10 @@ router.route('/')
             })
             .status(201)
             .json();
-    })
-    .delete((req, res) => {
+    }
+
+    deleteSession(req, res) {
         console.log('Deleting an  established connection');
         res.clearCookie(SESSION_COOKIE_KEY).status(200);
-    });
-
-export default router;
+    }
+}

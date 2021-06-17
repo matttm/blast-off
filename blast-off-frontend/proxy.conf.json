@@ -1,0 +1,9 @@
+
+{
+  "/markets": {
+    "target": "http://localhost:3232",
+    "secure": false,
+    "changeOrigin": true,
+    "logLevel": "debug"
+  }
+}
