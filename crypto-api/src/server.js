@@ -21,9 +21,9 @@ handler.get(
 
 const server = http.createServer(handler);
 const wss = new WebSocketServer({ server: server });
-const transceiver = new Transceiver();
 
 wss.on('connection', (ws, req) => {
+    const transceiver = new Transceiver();
     console.log(`Connection request from: ${req.connection.remoteAddress}`);
     ws.on('message', (data) => {
         console.log('data: ', data);
