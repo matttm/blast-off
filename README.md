@@ -1,5 +1,5 @@
 # Blast Off
-Currently in development
+Development has temporarily been suspended as of 10-09-21
 # Description
 # Getting Started
 # Author
