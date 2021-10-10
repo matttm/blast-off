@@ -3,7 +3,9 @@
 // The list of file replacements can be found in `angular.json`.
 
 export const environment = {
-  production: false
+  production: false,
+  CRYPTO_WS_API: 'ws://localhost:3232',
+  CRYPTO_HTTP_API: 'http://localhost:3232'
 };
 
 /*

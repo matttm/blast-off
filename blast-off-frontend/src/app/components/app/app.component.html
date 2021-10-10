@@ -1,8 +1,25 @@
 
 
 <mat-toolbar color="primary" class="expanded-toolbar">
-  <p>🚀</p>
-  <h1>{{title}}</h1>
+  <div id="banner-buttons">
+    <div id="title">
+      <div id="title-icon">
+        <p>🚀</p>
+      </div>
+      <h1>{{title}}</h1>
+    </div>
+    <div *ngIf="loginService.isLoggedIn; else notLoggedIn" class="login-actions">
+      <h3>Logout</h3>
+    </div>
+    <ng-template #notLoggedIn class="login-actions">
+      <div>
+        <h4><a routerLink="./login">Login</a></h4>
+      </div>
+      <div>
+        <h4><a routerLink="./register">Register</a></h4>
+      </div>
+    </ng-template>
+  </div>
 </mat-toolbar>
 
 <router-outlet></router-outlet>

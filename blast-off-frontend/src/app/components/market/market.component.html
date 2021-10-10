@@ -1,0 +1,14 @@
+
+<section>
+  <h3 id="market-heading">
+    Market
+  </h3>
+  <table id="market-table">
+    <tr>
+      <th *ngFor="let col of tableCols">
+        {{ col }}
+      </th>
+    </tr>
+    <tr app-list-item *ngFor="let tickerData of tickers$ | async" [tickerData]="tickerData"></tr>
+  </table>
+</section>
